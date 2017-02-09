@@ -22,10 +22,13 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
+//Import services modules
+import youtubeDataApiServiceModule from './youtubeDataApiService/youtubeDataApiService.service';
+
 import './app.less';
 
 angular.module('yoFullstackApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util
+   main, constants, util, youtubeDataApiServiceModule
 ])
   .config(routeConfig);
 
