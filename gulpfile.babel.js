@@ -162,6 +162,13 @@ let istanbul = lazypipe()
  * Env
  ********************/
 
+ import serveWebpack from './serve-webpack';
+
+gulp.task('serve:webpack', () => {
+    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    serveWebpack();
+});
+
 gulp.task('env:all', () => {
     let localConfig;
     try {
@@ -344,7 +351,7 @@ gulp.task('serve', cb => {
             'env:all'
         ],
         // 'webpack:dev',
-        ['start:server', 'start:client'],
+        ['start:server', 'serve:webpack', 'start:client'],
         'watch',
         cb
     );
@@ -600,3 +607,5 @@ gulp.task('buildcontrol:openshift', function(done) {
         function() {done();}
     );
 });
+
+

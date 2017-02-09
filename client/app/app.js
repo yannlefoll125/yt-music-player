@@ -35,3 +35,5 @@ angular.element(document)
       strictDi: true
     });
   });
+
+import '../touch';

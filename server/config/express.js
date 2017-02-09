@@ -2,25 +2,25 @@
  * Express configuration
  */
 
-'use strict';
+ 'use strict';
 
-import express from 'express';
-import favicon from 'serve-favicon';
-import morgan from 'morgan';
-import shrinkRay from 'shrink-ray';
-import bodyParser from 'body-parser';
-import methodOverride from 'method-override';
-import cookieParser from 'cookie-parser';
-import errorHandler from 'errorhandler';
-import path from 'path';
-import lusca from 'lusca';
-import config from './environment';
-import session from 'express-session';
-import connectMongo from 'connect-mongo';
-import mongoose from 'mongoose';
-var MongoStore = connectMongo(session);
+ import express from 'express';
+ import favicon from 'serve-favicon';
+ import morgan from 'morgan';
+ import shrinkRay from 'shrink-ray';
+ import bodyParser from 'body-parser';
+ import methodOverride from 'method-override';
+ import cookieParser from 'cookie-parser';
+ import errorHandler from 'errorhandler';
+ import path from 'path';
+ import lusca from 'lusca';
+ import config from './environment';
+ import session from 'express-session';
+ import connectMongo from 'connect-mongo';
+ import mongoose from 'mongoose';
+ var MongoStore = connectMongo(session);
 
-export default function(app) {
+ export default function(app) {
   var env = app.get('env');
 
   if(env === 'development' || env === 'test') {
@@ -58,11 +58,12 @@ export default function(app) {
     })
   }));
 
+
   /**
    * Lusca - express server security
    * https://github.com/krakenjs/lusca
    */
-  if(env !== 'test' && !process.env.SAUCE_USERNAME) {
+   if(env !== 'test' && !process.env.SAUCE_USERNAME) {
     app.use(lusca({
       csrf: {
         angular: true
@@ -78,56 +79,17 @@ export default function(app) {
   }
 
   if(env === 'development') {
-    const webpackDevMiddleware = require('webpack-dev-middleware');
-    const stripAnsi = require('strip-ansi');
-    const webpack = require('webpack');
-    const makeWebpackConfig = require('../../webpack.make');
-    const webpackConfig = makeWebpackConfig({ DEV: true });
-    const compiler = webpack(webpackConfig);
-    const browserSync = require('browser-sync').create();
-
-    /**
-     * Run Browsersync and use middleware for Hot Module Replacement
-     */
-    browserSync.init({
-      open: false,
-      logFileChanges: false,
-      proxy: `localhost:${config.port}`,
-      ws: true,
-      middleware: [
-        webpackDevMiddleware(compiler, {
-          noInfo: false,
-          stats: {
-            colors: true,
-            timings: true,
-            chunks: false
+        // Notify webpack to reload browser
+        let fs = require('fs');
+        let clientTextFile = path.join(__dirname, '../../client/touch.js');
+        fs.writeFile(clientTextFile, Date.now(), err => {
+          if(err) {
+            console.error(err);
           }
-        })
-      ],
-      port: config.browserSyncPort,
-      plugins: ['bs-fullscreen-message']
-    });
-
-    //testing server reload
-
-    /**
-     * Reload all devices when bundle is complete
-     * or send a fullscreen error message to the browser instead
-     */
-    compiler.plugin('done', function(stats) {
-      console.log('webpack done hook');
-      if(stats.hasErrors() || stats.hasWarnings()) {
-        return browserSync.sockets.emit('fullscreen:message', {
-          title: 'Webpack Error:',
-          body: stripAnsi(stats.toString()),
-          timeout: 100000
         });
       }
-      browserSync.reload();
-    });
-  }
 
-  if(env === 'development' || env === 'test') {
+      if(env === 'development' || env === 'test') {
     app.use(errorHandler()); // Error handler - has to be last
   }
 }
