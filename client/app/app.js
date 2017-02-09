@@ -25,7 +25,7 @@ import util from '../components/util/util.module';
 import './app.less';
 
 angular.module('yoFullstackApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-  footer, main, constants, util
+   main, constants, util
 ])
   .config(routeConfig);
 
