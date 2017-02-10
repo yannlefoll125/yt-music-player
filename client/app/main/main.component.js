@@ -20,17 +20,19 @@ class VideoResultViewModel {
 export class MainComponent {
 
   /*@ngInject*/
-  constructor(youtubeDataApiService) {
+  constructor($scope, youtubeDataApiService) {
+
+    this._scope = $scope;
+
     this.searchResults = [];
 
-    youtubeDataApiService.searchVideo("mgla full album", function(err, data) {
-      if(err) {
-        console.error('error while calling youtubeDataApiService.searchVideo(): ' + err);
-      }
-
-      console.log(data);
-    })
+    //Defining $scope event to listen to
+    $scope.$on('artist-search-result-down', function(event, data) {
+      console.log('MainController, received artist-search-result-down event');
+    });
   }
+
+
 
   
 
@@ -39,7 +41,7 @@ export class MainComponent {
 
 }
 
-MainComponent.$inject = ['youtubeDataApiService'];
+MainComponent.$inject = ['$scope', 'youtubeDataApiService'];
 
 export default angular.module('ytMusicPlayerApp.main', [ngRoute])
 .config(routes)

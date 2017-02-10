@@ -11,10 +11,11 @@ export class NavbarComponent {
 
   isCollapsed = true;
 
-  constructor($location) {
+  constructor($location, $scope) {
     'ngInject';
 
     this.$location = $location;
+    this.$scope = $scope;
   }
 
   isActive(route) {
@@ -24,6 +25,8 @@ export class NavbarComponent {
   onSearchSubmit(key) {
     console.log('onSearchSubmit: ' + this.searchQuery);
     this.searchQuery = '';
+
+    this.$scope.$emit('artist-search-result-up');
   }
 }
 
