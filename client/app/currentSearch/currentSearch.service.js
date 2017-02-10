@@ -18,6 +18,23 @@ export function currentSearchService() {
 		return this.videoItemList;
 	}
 
+	this.getVideoById = function(videoId) {
+		var resultArray = this.videoItemList.filter(function(curr) {
+			if(curr.id.videoId === this) {
+				return true;
+			} else {
+				return false;
+			}
+		}, videoId);
+
+		if(resultArray.length > 0) {
+			return resultArray[0];
+		} else {
+			return null;
+		}
+		
+	}
+
 
 	//Observer pattern
 	this.listenerList = [];

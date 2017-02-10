@@ -5,16 +5,35 @@ const ngRoute = require('angular-route');
 
 import routes from './album.routes';
 
-export class AlbumComponent {
-  /*@ngInject*/
-  constructor($routeParams) {
-    this.videoId = $routeParams['videoId'];
+class AlbumViewModel {
+  constructor() {
+    this.title = 'default title';
+    this.description = 'default description';
+  }
 
-    console.log(this.videoId);
+  setValuesFromApiItem(apiItem) {
+    this.title = apiItem.snippet.title;
+    this.description = apiItem.snippet.description;
   }
 }
 
-AlbumComponent.$inject = ['$routeParams'];
+export class AlbumComponent {
+  /*@ngInject*/
+  constructor($routeParams, currentSearch) {
+    this.videoId = $routeParams['videoId'];
+
+    this.albumViewModel = new AlbumViewModel();
+
+    var videoApiItem = currentSearch.getVideoById(this.videoId);
+
+    if(videoApiItem != null) {
+      this.albumViewModel.setValuesFromApiItem(videoApiItem)
+    }
+    
+  }
+}
+
+AlbumComponent.$inject = ['$routeParams', 'currentSearch'];
 
 export default angular.module('ytMusicPlayerApp.album', [ngRoute])
   .config(routes)
