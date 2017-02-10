@@ -15,24 +15,27 @@
 
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
+
+
+
       <ul class="nav navbar-nav">
-        <!-- Stylish input based on http://bootsnipp.com/snippets/featured/stylish-input-using-icon-font -->
+        <li ng-repeat="item in $ctrl.menu" ng-class="{active: $ctrl.isActive(item.link)}">
+          <a ng-href="{{item.link}}">{{item.title}}</a>
+        </li>
+
         <li>
+          <!-- Stylish input based on http://bootsnipp.com/snippets/featured/stylish-input-using-icon-font -->
           <div class="input-group stylish-input-group">
-            <input type="text" class="form-control"  placeholder="Search" >
+            <input type="text" class="form-control"  placeholder="Search artist" ng-model="$ctrl.searchQuery" ng-keyup="$event.keyCode === 13 && $ctrl.onSearchSubmit()" >
             <span class="input-group-addon">
-              <button type="submit">
+              <button type="submit" ng-click="$ctrl.onSearchSubmit()">
                 <span class="glyphicon glyphicon-search"></span>
               </button>  
             </span>
           </div>
+
         </li>
 
-
-
-        <li ng-repeat="item in $ctrl.menu" ng-class="{active: $ctrl.isActive(item.link)}">
-          <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
       </ul>
     </div>
   </div>

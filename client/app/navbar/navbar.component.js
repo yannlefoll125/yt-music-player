@@ -7,9 +7,6 @@ export class NavbarComponent {
   menu = [{
     title: 'Home',
     link: '/'
-  }, {
-    title: 'Button2',
-    link: '/'
   }];
 
   isCollapsed = true;
@@ -22,6 +19,11 @@ export class NavbarComponent {
 
   isActive(route) {
     return route === this.$location.path();
+  }
+
+  onSearchSubmit(key) {
+    console.log('onSearchSubmit: ' + this.searchQuery);
+    this.searchQuery = '';
   }
 }
 

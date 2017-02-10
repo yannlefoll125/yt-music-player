@@ -7,11 +7,21 @@ import routes from './main.routes';
 import youtubeDataApiService from '../youtubeDataApiService/youtubeDataApiService.service';
 
 
+class VideoResultViewModel {
+
+  constructor(title, description) {
+    this.title = title;
+    this.description = description;
+
+  }
+    
+}
+
 export class MainComponent {
 
   /*@ngInject*/
   constructor(youtubeDataApiService) {
-    this.message = 'Hello';
+    this.searchResults = [];
 
     youtubeDataApiService.searchVideo("mgla full album", function(err, data) {
       if(err) {
@@ -21,6 +31,11 @@ export class MainComponent {
       console.log(data);
     })
   }
+
+  
+
+
+
 
 }
 
