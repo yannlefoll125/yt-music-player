@@ -22,6 +22,9 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 
+//Import components
+import AlbumComponent from './album/album.component'
+
 //Import controllers
 import rootControllerModule from './root/root.controller';
 
@@ -32,7 +35,7 @@ import './app.less';
 
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util, youtubeDataApiServiceModule, rootControllerModule
+   main, constants, util, youtubeDataApiServiceModule, rootControllerModule, AlbumComponent
 
 ])
   .config(routeConfig);
