@@ -23,19 +23,20 @@ export class MainComponent {
 
     var self = this;
 
-    this._scope = $scope;
-
     this.searchResults = [];
 
     //Defining $scope event to listen to
     $scope.$on('artist-search-result-down', function(event, data) {
       console.log('MainController, received artist-search-result-down event');
+
+        self.searchResults = [];
+
       
-      for(var i of data.items) {
+      for(var i of data) {
         self.searchResults.push(new VideoResultViewModel(i.snippet.title, i.snippet.description));
       }
 
-      console.log(self.searchResults);
+      //console.log(self.searchResults);
     });
   }
 
