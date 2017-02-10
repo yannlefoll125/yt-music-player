@@ -16,33 +16,43 @@ class VideoResultViewModel {
     this.videoId = videoId;
 
   }
-    
+
 }
 
 export class MainComponent {
 
   /*@ngInject*/
-  constructor($scope, youtubeDataApiService) {
+  constructor($scope, youtubeDataApiService, currentSearch) {
 
     var self = this;
 
     this.searchResults = [];
 
-    //Defining $scope event to listen to
-    $scope.$on('artist-search-result-down', function(event, data) {
-      console.log('MainController, received artist-search-result-down event');
+    this.currentSearchCallback = function(event) {
+    console.log('currentSearchCallback: ' + event)
+    switch(event) {
+      case 'video-item-list-update':
+          self.searchResults = [];
+        for(var i of self.currentSearch.getVideoItemList()) {
+          self.searchResults.push(new VideoResultViewModel(i.snippet.title, i.snippet.description, i.id.videoId));
+        }
 
-        self.searchResults = [];
-
-      
-      for(var i of data) {
-        self.searchResults.push(new VideoResultViewModel(i.snippet.title, i.snippet.description, i.id.videoId));
-      }
-
-      //console.log(self.searchResults);
-    });
+      break;
+      default:
+      break;
+    }
 
   }
+
+
+    this.currentSearch = currentSearch;
+    this.currentSearch.addListener(this.currentSearchCallback);
+
+    
+
+  }
+
+  
 
 
 
@@ -56,7 +66,7 @@ export class MainComponent {
 
 }
 
-MainComponent.$inject = ['$scope', 'youtubeDataApiService'];
+MainComponent.$inject = ['$scope', 'youtubeDataApiService', 'currentSearch'];
 
 
 export default angular.module('ytMusicPlayerApp.main', [ngRoute])
