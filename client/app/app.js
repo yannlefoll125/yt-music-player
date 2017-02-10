@@ -26,16 +26,17 @@ import util from '../components/util/util.module';
 import AlbumComponent from './album/album.component'
 
 //Import controllers
-import rootControllerModule from './root/root.controller';
+import rootController from './root/root.controller';
 
 //Import services modules
-import youtubeDataApiServiceModule from './youtubeDataApiService/youtubeDataApiService.service';
+import youtubeDataApiService from './youtubeDataApiService/youtubeDataApiService.service';
+import currentSearchService from './currentSearch/currentSearch.service';
 
 import './app.less';
 
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util, youtubeDataApiServiceModule, rootControllerModule, AlbumComponent
+   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, currentSearchService
 
 ])
   .config(routeConfig);
