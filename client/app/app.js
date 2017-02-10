@@ -30,8 +30,10 @@ import youtubeDataApiServiceModule from './youtubeDataApiService/youtubeDataApiS
 
 import './app.less';
 
+
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
    main, constants, util, youtubeDataApiServiceModule, rootControllerModule
+
 ])
   .config(routeConfig);
 

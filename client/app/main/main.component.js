@@ -4,6 +4,8 @@ const ngRoute = require('angular-route');
 
 
 import routes from './main.routes';
+import youtubeDataApiService from '../youtubeDataApiService/youtubeDataApiService.service';
+
 
 
 class VideoResultViewModel {
@@ -39,12 +41,23 @@ export class MainComponent {
 
       //console.log(self.searchResults);
     });
+
   }
+
+
+
+/*searchVideo(query) {
+  console.log('searchVideo: query=' + query);
+  youtubeDataApiService.searchVideo(query, function(err, data) {
+    console.log('searchVideo result: ' + JSON.stringify(data));
+  });
+}*/
 
 
 }
 
 MainComponent.$inject = ['$scope', 'youtubeDataApiService'];
+
 
 export default angular.module('ytMusicPlayerApp.main', [ngRoute])
 .config(routes)
