@@ -2,7 +2,7 @@
 
 	<ul ng-repeat="video in $ctrl.searchResults">
 		<li>
-			<h3>{{video.title}}</h3>
+			<a href="/album/{{video.videoId}}">{{video.title}}</a>
 			<p>{{video.description}}</p>
 
 		</li>

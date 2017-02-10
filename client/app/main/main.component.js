@@ -8,9 +8,10 @@ import routes from './main.routes';
 
 class VideoResultViewModel {
 
-  constructor(title, description) {
+  constructor(title, description, videoId) {
     this.title = title;
     this.description = description;
+    this.videoId = videoId;
 
   }
     
@@ -33,7 +34,7 @@ export class MainComponent {
 
       
       for(var i of data) {
-        self.searchResults.push(new VideoResultViewModel(i.snippet.title, i.snippet.description));
+        self.searchResults.push(new VideoResultViewModel(i.snippet.title, i.snippet.description, i.id.videoId));
       }
 
       //console.log(self.searchResults);
