@@ -1,9 +1,12 @@
 <div>
 
-	<div class="row">
+	<ul ng-repeat="video in $ctrl.searchResults">
+		<li>
+			<h3>{{video.title}}</h3>
+			<p>{{video.description}}</p>
 
-
-	</div>
+		</li>
+	</ul>
 
 
 

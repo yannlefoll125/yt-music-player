@@ -30,14 +30,14 @@ import youtubeDataApiServiceModule from './youtubeDataApiService/youtubeDataApiS
 
 import './app.less';
 
-angular.module('yoFullstackApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
+angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
    main, constants, util, youtubeDataApiServiceModule, rootControllerModule
 ])
   .config(routeConfig);
 
 angular.element(document)
   .ready(() => {
-    angular.bootstrap(document, ['yoFullstackApp'], {
+    angular.bootstrap(document, ['ytMusicPlayerApp'], {
       strictDi: true
     });
   });
