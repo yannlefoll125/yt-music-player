@@ -103,10 +103,18 @@ export function index(req, res) {
 
 // Gets a single Local from the DB
 export function show(req, res) {
-  /*return Local.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))          //Then calls the function passed as arg with the query returned doc as param
-    .then(respondWithResult(res))
-    .catch(handleError(res));*/
+
+  var filePath = path.join(__dirname, '../../files', req.params.name + ".json");
+  console.log(filePath);
+
+  fs.readFile(filePath, {encoding: 'utf8' }, (err, data) => {
+    if(err) {
+      res.status(404).end();
+    } else {
+      res.status(200).json(JSON.parse(data));
+    }
+  });
+
 }
 
 // Creates a new Local in the DB

@@ -1,4 +1,4 @@
-export itemList = [
+[
   {
     "kind": "youtube#searchResult",
     "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/NN2AFS2SAiv8T1c5FF2g9ZWHlMk\"",
@@ -98,4 +98,4 @@ export itemList = [
       "liveBroadcastContent": "none"
     }
   }
-];
+]
