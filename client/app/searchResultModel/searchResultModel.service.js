@@ -18,7 +18,7 @@ export function searchResultModelService($cookies) {
 	this.videoItemList = [];
 
 	this.setVideoItemList = function(itemList) {
-
+		this.videoItemList = [];
 		for(var v of itemList) {
 			this.videoItemList.push(new SearchResultModel(v));
 		}
