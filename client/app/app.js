@@ -28,8 +28,13 @@ import AlbumComponent from './album/album.component'
 //Import controllers
 import rootController from './root/root.controller';
 
+//True to use youtube data api, false to use a mock service.
+const YOUTUBE_DATA_API = true;
+
 //Import services modules
 import youtubeDataApiService from './youtubeDataApiService/youtubeDataApiService.service';
+//import youtubeDataApiMockService from '../mock/youtubeDataApiMockService/youtubeDataApiMockService.service'
+
 import currentSearchService from './currentSearch/currentSearch.service';
 
 import './app.less';
