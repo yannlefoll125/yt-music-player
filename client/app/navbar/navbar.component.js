@@ -12,13 +12,13 @@ export class NavbarComponent {
 
   isCollapsed = true;
 
-  constructor($location, $scope, youtubeDataApiService, currentSearch) {
+  constructor($location, $scope, youtubeDataApiService, searchResultModel) {
     'ngInject';
 
     this.$location = $location;
     this.$scope = $scope;
     this.youtubeDataApiService = youtubeDataApiService;
-    this.currentSearch = currentSearch;
+    this.searchResultModel = searchResultModel;
   }
 
   isActive(route) {
@@ -26,7 +26,6 @@ export class NavbarComponent {
   }
 
   onSearchSubmit() {
-    console.log('onSearchSubmit: ' + this.searchQuery);
 
     var self = this;
 
@@ -35,7 +34,7 @@ export class NavbarComponent {
         console.error('youtubeDataApiService.searchVideo error: ' + err);
       }
 
-      self.currentSearch.setVideoItemList(itemList);
+      self.searchResultModel.setVideoItemList(itemList);
 
 
       //self.$scope.$emit('artist-search-result-up');      
@@ -50,7 +49,7 @@ export class NavbarComponent {
   }
 }
 
-NavbarComponent.$inject = ['$location', '$scope', 'youtubeDataApiService', 'currentSearch'];
+NavbarComponent.$inject = ['$location', '$scope', 'youtubeDataApiService', 'searchResultModel'];
 
 export default angular.module('directives.navbar', [])
   .component('navbar', {

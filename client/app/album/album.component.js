@@ -27,8 +27,7 @@ export class AlbumComponent {
 
     this.albumViewModel = new AlbumViewModel();
     this.albumModel.setControllerCallback(function(event) {
-      console.log(self.albumViewModel);
-      console.log(self.albumModel.model);
+
       switch(event) {
         case 'model-update':
         self.albumViewModel.setValuesFromAlbumModel(self.albumModel.model);

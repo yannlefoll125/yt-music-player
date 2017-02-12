@@ -41,7 +41,7 @@ if(YOUTUBE_DATA_API) {
 	var youtubeDataApiService = youtubeDataApiMockService;
 }
 
-import currentSearchService from './currentSearch/currentSearch.service';
+import searchResultModel from './searchResultModel/searchResultModel.service';
 
 import albumModel from './album/albumModel/albumModel.service';
 
@@ -49,7 +49,7 @@ import './app.less';
 
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, currentSearchService, albumModel
+   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel
 
 ])
   .config(routeConfig)

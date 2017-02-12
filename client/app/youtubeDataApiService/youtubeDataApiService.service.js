@@ -14,8 +14,6 @@ export function youtubeDataApiService($http) {
 	//Get a lisf of videos corresponding to a query. The callback returns a list of items
 	this.searchVideo = function(query, callback, resNumber=DEFAULT_RES_NUMBER) {
 
-		console.log('youtubeDataApiService.searchVideo()');
-
 		var resCount = 0;
 		var url = API_URL + '/search';
 
