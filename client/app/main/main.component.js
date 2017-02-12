@@ -32,10 +32,7 @@ export class MainComponent {
 
       switch(event) {
         case 'video-item-list-update':
-        self.searchResults = [];
-        for(var i of self.searchResultModel.getVideoItemList()) {
-          self.searchResults.push(new VideoResultViewModel(i.title, i.description, i.videoId));
-        }
+        self.searchResults = self.videoResultViewModelFromModel(self.searchResultModel);
 
         break;
         default:
@@ -47,7 +44,19 @@ export class MainComponent {
 
     this.searchResultModel = searchResultModel;
     this.searchResultModel.addListener(this.searchResultModelCallback);
+    this.searchResults = this.videoResultViewModelFromModel(this.searchResultModel);
 
+
+  }
+
+  videoResultViewModelFromModel(model) {
+    var searchResults = [];
+    for(var i of model.getVideoItemList()) {
+
+      searchResults.push(new VideoResultViewModel(i.title, i.description, i.videoId));
+    }
+
+    return searchResults;
   }
 
 }

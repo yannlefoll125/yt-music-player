@@ -33,9 +33,10 @@ export class NavbarComponent {
       if(err) {
         console.error('youtubeDataApiService.searchVideo error: ' + err);
       }
-
+      
       self.searchResultModel.setVideoItemList(itemList);
 
+      self.$location.path('/');
 
       //self.$scope.$emit('artist-search-result-up');      
     })
@@ -52,8 +53,8 @@ export class NavbarComponent {
 NavbarComponent.$inject = ['$location', '$scope', 'youtubeDataApiService', 'searchResultModel'];
 
 export default angular.module('directives.navbar', [])
-  .component('navbar', {
-    template: require('./navbar.html'),
-    controller: NavbarComponent
-  })
-  .name;
+.component('navbar', {
+  template: require('./navbar.html'),
+  controller: NavbarComponent
+})
+.name;
