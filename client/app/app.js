@@ -29,11 +29,17 @@ import AlbumComponent from './album/album.component'
 import rootController from './root/root.controller';
 
 //True to use youtube data api, false to use a mock service.
-const YOUTUBE_DATA_API = true;
+const YOUTUBE_DATA_API = false;
 
 //Import services modules
-import youtubeDataApiService from './youtubeDataApiService/youtubeDataApiService.service';
-//import youtubeDataApiMockService from '../mock/youtubeDataApiMockService/youtubeDataApiMockService.service'
+import youtubeDataApiRealService from './youtubeDataApiService/youtubeDataApiService.service';
+import youtubeDataApiMockService from './mock/youtubeDataApiMockService/youtubeDataApiMockService.service'
+
+if(YOUTUBE_DATA_API) {
+	var youtubeDataApiService = youtubeDataApiRealService;
+} else {
+	var youtubeDataApiService = youtubeDataApiMockService;
+}
 
 import currentSearchService from './currentSearch/currentSearch.service';
 
