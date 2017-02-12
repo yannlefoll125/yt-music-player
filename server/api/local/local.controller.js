@@ -13,9 +13,14 @@
 import jsonpatch from 'fast-json-patch';
 import Local from './local.model';
 
+const fs = require('fs');
+const path = require('path');
+
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
+    console.log('local api, resond with result');
+    console.log(entity);
     if(entity) {
       return res.status(statusCode).json(entity);
     }
@@ -63,20 +68,45 @@ function handleError(res, statusCode) {
   };
 }
 
+
+function respondWithFileList(res, fileList) {
+
+}
+
 // Gets a list of Locals
 export function index(req, res) {
-  console.log('/api/locals, current dir: ' + __dirname);
-  return Local.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+
+  console.log(res.data);
+
+  var fileDirPath = path.join(__dirname, '../../files');
+
+  console.log('Local files folder path: ' + fileDirPath);
+
+  var fileList = [];
+
+  fs.readdir(fileDirPath, function(err, files) {
+    if(err) {
+      console.error('Local index: error while reading dir: ' + fileDirPath);
+      console.error(err);
+      
+      res.status(404).end();
+
+    } else {
+      console.log(fileDirPath + ' contains: ' + files);
+
+      res.status(200).json(files);
+    }
+  });
+
+
 }
 
 // Gets a single Local from the DB
 export function show(req, res) {
-  return Local.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
+  /*return Local.findById(req.params.id).exec()
+    .then(handleEntityNotFound(res))          //Then calls the function passed as arg with the query returned doc as param
     .then(respondWithResult(res))
-    .catch(handleError(res));
+    .catch(handleError(res));*/
 }
 
 // Creates a new Local in the DB
