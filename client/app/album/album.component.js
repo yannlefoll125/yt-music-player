@@ -14,6 +14,7 @@ class AlbumViewModel {
   setValuesFromAlbumModel(albumModel) {
     this.title = albumModel.title;
     this.description = albumModel.description;
+    this.thumbnails = { default: albumModel.thumbnails.default };
   }
 }
 
@@ -51,15 +52,6 @@ export class AlbumComponent {
     });
 
 
-  }
-
-  onModelEvent(event) {
-    console.log(self.albumViewModel);
-    switch(event) {
-      case 'model-update':
-      self.albumViewModel.setValuesFromAlbumModel(this.albumViewModel.model);
-      break;
-    }
   }
 }
 
