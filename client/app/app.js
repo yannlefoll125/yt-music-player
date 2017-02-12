@@ -29,11 +29,11 @@ import AlbumComponent from './album/album.component'
 import rootController from './root/root.controller';
 
 //True to use youtube data api, false to use a mock service.
-const YOUTUBE_DATA_API = false;
+const YOUTUBE_DATA_API = true;
 
 //Import services modules
 import youtubeDataApiRealService from './youtubeDataApiService/youtubeDataApiService.service';
-import youtubeDataApiMockService from './mock/youtubeDataApiMockService/youtubeDataApiMockService.service'
+import youtubeDataApiMockService from '../mock/youtubeDataApiMockService/youtubeDataApiMockService.service'
 
 if(YOUTUBE_DATA_API) {
 	var youtubeDataApiService = youtubeDataApiRealService;
@@ -43,14 +43,19 @@ if(YOUTUBE_DATA_API) {
 
 import currentSearchService from './currentSearch/currentSearch.service';
 
+import albumModel from './album/albumModel/albumModel.service';
+
 import './app.less';
 
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, currentSearchService
+   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, currentSearchService, albumModel
 
 ])
-  .config(routeConfig);
+  .config(routeConfig)
+  .config(['$httpProvider',function($httpProvider) {
+    $httpProvider.defaults.cache = true;
+  }]);
 
 angular.element(document)
   .ready(() => {

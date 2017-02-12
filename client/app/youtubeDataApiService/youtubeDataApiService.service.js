@@ -11,6 +11,7 @@ export function youtubeDataApiService($http) {
 	const API_URL = "https://www.googleapis.com/youtube/v3";
 	const DEFAULT_RES_NUMBER = 10;
 
+	//Get a lisf of videos corresponding to a query. The callback returns a list of items
 	this.searchVideo = function(query, callback, resNumber=DEFAULT_RES_NUMBER) {
 
 		console.log('youtubeDataApiService.searchVideo()');
@@ -62,6 +63,29 @@ export function youtubeDataApiService($http) {
 		getNextPage();
 		
 
+	}
+
+
+	this.getVideoDetail = function(videoId, callback) {
+		var params = {
+			key: API_KEY,
+			part: 'snippet',
+			id: videoId.toString()
+		};
+
+		var url = API_URL + '/videos';
+
+		$http.get(url, {params: params}).then(function(res) {
+			var itemList = res.data.items;
+
+			if(itemList.length > 0) {
+				callback(false, itemList[0]);
+			} else {
+				callback(res);
+			}
+		}, function(res) {
+			callback(res);
+		})
 	}
 
 }

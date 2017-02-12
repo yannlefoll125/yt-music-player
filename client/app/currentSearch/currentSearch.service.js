@@ -2,24 +2,27 @@
 const angular = require('angular');
 
 /*@ngInject*/
-export function currentSearchService() {
+export function currentSearchService($cookies) {
 	// AngularJS will instantiate a singleton by calling "new" on this function
 
-	this.videoItemList = [];
+	//this.videoItemList = [];
 
 	this.setVideoItemList = function(itemList) {
 
-		this.videoItemList = itemList;
+		//this.videoItemList = itemList;
+		$cookies.putObject('videoItemList', itemList);
 		this.notifyListener('video-item-list-update');
 
 	}
 
 	this.getVideoItemList = function() {
-		return this.videoItemList;
+		return $cookies.getObject('videoItemList');
 	}
 
 	this.getVideoById = function(videoId) {
-		var resultArray = this.videoItemList.filter(function(curr) {
+
+		var videoItemList = $cookies.getObject('videoItemList');
+		var resultArray = videoItemList.filter(function(curr) {
 			if(curr.id.videoId === this) {
 				return true;
 			} else {
@@ -35,6 +38,14 @@ export function currentSearchService() {
 		
 	}
 
+
+	this.setCurrentVideoDetail = function(videoDetail) {
+		$cookies.putObject('currentVideoDetail', videoDetail);
+	}
+
+	this.getCurrentVideoDetail = function(currentVideoDetail) {
+		return $cookies.getObject('currentVideoDetail');
+	}
 
 	//Observer pattern
 	this.listenerList = [];
@@ -58,7 +69,7 @@ export function currentSearchService() {
 			callback(event);
 		}
 	}
-}
+};
 
 export default angular.module('ytMusicPlayerApp.currentSearch', [])
   .service('currentSearch', currentSearchService)
