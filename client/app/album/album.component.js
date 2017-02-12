@@ -15,6 +15,19 @@ class AlbumViewModel {
     this.title = albumModel.title;
     this.description = albumModel.description;
     this.thumbnails = { default: albumModel.thumbnails.default };
+    this.trackList = [];
+
+    for(var tm of albumModel.trackList) {
+      this.trackList.push(new TrackViewModel(tm));
+    }
+  }
+}
+
+class TrackViewModel {
+  constructor(trackModel) {
+    this.num = trackModel.num;
+    this.title = trackModel.title;
+    this.length = trackModel.length;
   }
 }
 

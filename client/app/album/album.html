@@ -10,6 +10,10 @@
 			<h1>{{ $ctrl.albumViewModel.title }}</h1>
 
 			<p>{{ $ctrl.albumViewModel.description }}</p>
+
+			<ul ng-repeat="track in $ctrl.albumViewModel.trackList">
+				<li>{{ track.num }}. {{ track.title }} | {{ track.length }}</li>
+			</ul>
 		</div>
 
 	</div>
