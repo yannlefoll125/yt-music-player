@@ -12,7 +12,7 @@ class SearchResultModel {
 }
 
 /*@ngInject*/
-export function searchResultModelService($cookies) {
+export function searchResultModelService() {
 	// AngularJS will instantiate a singleton by calling "new" on this function
 
 	this.videoItemList = [];
@@ -73,6 +73,6 @@ export function searchResultModelService($cookies) {
 	}
 };
 
-export default angular.module('ytMusicPlayerApp.currentSearch', [])
+export default angular.module('ytMusicPlayerApp.searchResultModel', [])
   .service('searchResultModel', searchResultModelService)
   .name;
