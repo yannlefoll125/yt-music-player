@@ -1,29 +1,8 @@
 'use strict';
 const angular = require('angular');
 
-class AlbumModel {
-	constructor() {
-		this.title = 'default title';
-		this.description = 'default description';
-		this.trackList = [];
-	}
-
-	setTrackList(trackList) {
-		this.trackList = trackList;
-	}
-}
-
-class TrackModel {
-	constructor(num, title, start) {
-		this.num = num;
-		this.title = title;
-		this.start = start;
-	}
-
-	setLength(length) {
-		this.length = length;
-	}
-}
+import TrackModel from './TrackModel.class';
+import AlbumModel from './AlbumModel.class';
 
 /*@ngInject*/
 export function albumModelService() {

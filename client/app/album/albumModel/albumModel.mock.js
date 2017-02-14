@@ -1,6 +1,9 @@
 'use strict';
 const angular = require('angular');
 
+import TrackModel from './TrackModel.class';
+import AlbumModel from './AlbumModel.class';
+
 /*@ngInject*/
 export function albumModelService() {
 	// AngularJS will instantiate a singleton by calling "new" on this function
@@ -28,6 +31,7 @@ export function albumModelService() {
 	this.parseTrackList = function(text) {
 		
 	} 
+
 
 }
 
