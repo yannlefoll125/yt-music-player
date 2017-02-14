@@ -1,8 +1,8 @@
 'use strict';
 
 import main from './main.component';
-import youtubeDataApiServiceModule from '../youtubeDataApiService/youtubeDataApiService.service';
-import searchResultModelServiceModule from '../searchResultModel/searchResultModel.service';
+import youtubeDataApiServiceModule from '../youtubeDataApiService/youtubeDataApiService.mock';
+import searchResultModelServiceModule from '../searchResultModel/searchResultModel.mock';
 
 describe('Component: MainComponent', function() {
   // load the controller's module
@@ -13,18 +13,14 @@ describe('Component: MainComponent', function() {
 
 
   var MainComponent;
-  var youtubeDataApiService;
-  var searchResultModelService;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($componentController, _youtubeDataApiService_, _searchResultModelService_) {
+  beforeEach(inject(function($componentController, youtubeDataApiService, searchResultModel) {
 
-    youtubeDataApiService = _youtubeDataApiService_;
-    searchResultModelService = _searchResultModelService_;
 
     MainComponent = $componentController('main', {
-      'youtubeDataApiService': youtubeDataApiService,
-      'searchResultModelService': searchResultModelService
+      youtubeDataApiService,
+      searchResultModel
     });
   }));
 
