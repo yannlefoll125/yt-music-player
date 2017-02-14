@@ -40,21 +40,20 @@ export function albumModelService() {
 
 	this.parseTrackList = function(text) {
 		const timeRegexp = /\d{1,2}:\d{2}/;
-		const numRegexp = /^\d+/;
+		const numRegexp = /^\d+\.?/;
 
 		var lines = text.split('\n');
-
 
 		var trackList = [];
 
 		for(var line of lines) {
+			line = line.trim();
 			var timeResults = line.match(timeRegexp);
 			var numResults = line.match(numRegexp);
 
-
 			if(numResults) {
 				var num = numResults[0];
-				line = line.split(num).join('');
+				line = line.replace(numRegexp, '');
 			}
 
 			if(timeResults) {
