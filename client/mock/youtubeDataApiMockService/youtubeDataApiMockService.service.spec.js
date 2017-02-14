@@ -1,8 +1,10 @@
 'use strict';
 
-describe('Service: youtubeDataApiService', function() {
+import youtubeDataApiMockService from './youtubeDataApiMockService.service';
+
+describe('Service: youtubeDataApiMockService', function() {
   // load the service's module
-  beforeEach(module('ytMusicPlayerApp.youtubeDataApiService'));
+  beforeEach(angular.mock.module(youtubeDataApiMockService));
 
   // instantiate service
   var youtubeDataApiService;
@@ -10,12 +12,9 @@ describe('Service: youtubeDataApiService', function() {
     youtubeDataApiService = _youtubeDataApiService_;
   }));
 
-  /*it('should do something', function() {
+  it('should do something', function() {
     expect(!!youtubeDataApiService).toBe(true);
-  });*/
+  });
 
-  it('testing test framework', function() {
-    expect(false).toBe(true);
-  })
 
 });

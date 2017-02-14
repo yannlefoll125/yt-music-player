@@ -7,10 +7,14 @@ describe('Controller: RootCtrl', function() {
   beforeEach(angular.mock.module(root));
 
   var RootCtrl;
+  var scope;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($controller) {
-    RootCtrl = $controller('RootCtrl', {});
+  beforeEach(inject(function($controller, $rootScope) {
+    scope = $rootScope.$new();
+    RootCtrl = $controller('RootController', {
+      $scope: scope
+    });
   }));
 
   it('should ...', function() {

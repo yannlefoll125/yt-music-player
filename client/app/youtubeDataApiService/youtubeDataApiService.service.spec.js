@@ -12,12 +12,12 @@ describe('Service: youtubeDataApiService', function() {
     youtubeDataApiService = _youtubeDataApiService_;
   }));
 
-  /*it('should do something', function() {
+  it('should do something', function() {
     expect(!!youtubeDataApiService).toBe(true);
-  });*/
+  });
 
-  it('testing test framework', function() {
+  /*it('testing test framework', function() {
     expect(true).toBe(true);
-  })
+  })*/
 
 });
