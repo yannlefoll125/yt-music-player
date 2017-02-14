@@ -1,8 +1,10 @@
 'use strict';
 
+import albumModelService from './albumModel.service';
+
 describe('Service: albumModel', function() {
   // load the service's module
-  beforeEach(module('ytMusicPlayerApp.albumModel'));
+  beforeEach(angular.mock.module(albumModelService));
 
   // instantiate service
   var albumModel;

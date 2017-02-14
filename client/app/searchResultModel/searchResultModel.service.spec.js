@@ -1,8 +1,10 @@
 'use strict';
 
+import searchResultModelService from './searchResultModel.service';
+
 describe('Service: searchResultModel', function() {
   // load the service's module
-  beforeEach(module('ytMusicPlayerApp.searchResultModel'));
+  beforeEach(angular.mock.module(searchResultModelService));
 
   // instantiate service
   var searchResultModel;

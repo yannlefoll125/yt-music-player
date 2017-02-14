@@ -1,8 +1,10 @@
 'use strict';
 
+import album from './album.component';
+
 describe('Component: AlbumComponent', function() {
   // load the controller's module
-  beforeEach(module('ytMusicPlayerApp.album'));
+  beforeEach(angular.mock.module(album));
 
   var AlbumComponent;
 

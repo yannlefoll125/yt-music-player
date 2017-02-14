@@ -1,8 +1,10 @@
 'use strict';
 
+import root from './root.controller';
+
 describe('Controller: RootCtrl', function() {
   // load the controller's module
-  beforeEach(module('ytMusicPlayerApp.root'));
+  beforeEach(angular.mock.module(root));
 
   var RootCtrl;
 

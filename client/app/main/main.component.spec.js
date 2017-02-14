@@ -1,8 +1,10 @@
 'use strict';
 
+import main from './main.component';
+
 describe('Component: MainComponent', function() {
   // load the controller's module
-  beforeEach(module('ytMusicPlayerApp.main'));
+  beforeEach(angular.mock.module(main));
 
   var MainComponent;
 
