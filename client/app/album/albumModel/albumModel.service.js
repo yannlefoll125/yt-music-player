@@ -25,8 +25,6 @@ export function albumModelService() {
 
 		this.model.setTrackList(this.parseTrackList(this.model.description));
 
-		console.log(this.model);
-
 		this.notifyController('model-update');
 	}
 

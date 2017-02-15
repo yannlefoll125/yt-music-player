@@ -2,19 +2,128 @@
 
 import albumModelService from './albumModel.service';
 import TrackModel from './TrackModel.class';
+import AlbumModel from './AlbumModel.class';
 
 describe('Service: albumModel', function() {
+
   // load the service's module
   beforeEach(angular.mock.module(albumModelService));
+
+  var controllerMock = {
+    callback: function(event) {
+
+    }
+  }
+  
 
   // instantiate service
   var albumModel;
   beforeEach(inject(function(_albumModel_) {
     albumModel = _albumModel_;
+    albumModel.controllerCallback = controllerMock.callback;
   }));
 
-  it('should do something', function() {
+  it('service should be injected', function() {
     expect(!!albumModel).toBe(true);
+  });
+
+  beforeAll(function() {
+    spyOn(controllerMock, 'callback');
+  });
+
+  describe('notifyController', function() {
+    it('should call controllerCallback', function() {
+      albumModel.notifyController('eventName');
+      expect(controllerMock.callback).toHaveBeenCalledWith('eventName');
+    })
+  })
+  
+
+  describe('set this.model attributes', function(){
+
+    beforeEach(function() {
+      albumModel.model = new AlbumModel();
+    })
+
+    it('should initialize model with title: "test title" and description: "test description"', function() {
+      var title = 'test title';
+      var description = 'test description';
+      albumModel.setAlbumModelValues(title, description);
+
+      expect(albumModel.model.title).toBe(title);
+      expect(albumModel.model.description).toBe(description);
+
+      expect(controllerMock.callback).toHaveBeenCalled();
+    });
+
+    it('should initialize model with from an api result (youtube data API video item)', function() {
+
+      var apiResult = {
+        "kind": "youtube#video",
+        "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/cXq8QP5yZACKPtJsmodoPZBzkfw\"",
+        "id": "71zwQWWK24U",
+        "snippet": {
+          "publishedAt": "2012-08-22T09:43:11.000Z",
+          "channelId": "UCYaYZQE2pymOZ0k3iaRdgcw",
+          "title": "Mgła - Groza [Full - HD]",
+          "description": "1. Groza I 0:00\r\n2. Groza II 11:22\r\n3. Groza III 18:38\r\n4. Groza IV 26:25\r\n\r\nMore info/Buy: http://www.cfprod.com/nh/index6.php\r\n\r\nNo copyright is intended. The rights to this video are assumed by the owner and its affiliates.",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            },
+            "standard": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/sddefault.jpg",
+              "width": 640,
+              "height": 480
+            },
+            "maxres": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/maxresdefault.jpg",
+              "width": 1280,
+              "height": 720
+            }
+          },
+          "channelTitle": "OdiumNostrum",
+          "tags": [
+          "mgla"
+          ],
+          "categoryId": "10",
+          "liveBroadcastContent": "none",
+          "localized": {
+            "title": "Mgła - Groza [Full - HD]",
+            "description": "1. Groza I 0:00\r\n2. Groza II 11:22\r\n3. Groza III 18:38\r\n4. Groza IV 26:25\r\n\r\nMore info/Buy: http://www.cfprod.com/nh/index6.php\r\n\r\nNo copyright is intended. The rights to this video are assumed by the owner and its affiliates."
+          }
+        }
+      };
+
+      albumModel.setAlbumModelValuesFromApiResult(apiResult);
+
+      expect(albumModel.model.title).toBe("Mgła - Groza [Full - HD]");
+      expect(albumModel.model.description).toBe("1. Groza I 0:00\r\n2. Groza II 11:22\r\n3. Groza III 18:38\r\n4. Groza IV 26:25\r\n\r\nMore info/Buy: http://www.cfprod.com/nh/index6.php\r\n\r\nNo copyright is intended. The rights to this video are assumed by the owner and its affiliates.");
+      expect(albumModel.model.thumbnails).toEqual({"default": {
+        "url": "https://i.ytimg.com/vi/71zwQWWK24U/default.jpg",
+        "width": 120,
+        "height": 90
+      }});
+
+      expect(albumModel.model.trackList.length).toBe(4);
+
+      expect(controllerMock.callback).toHaveBeenCalled();
+    });
+
+
+    
   });
 
   describe('parseTrackList EIF I->III with start, no album length', function() {
