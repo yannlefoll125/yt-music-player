@@ -1,15 +1,7 @@
 'use strict';
 const angular = require('angular');
 
-class SearchResultModel {
-	constructor(apiSearchResult) {
-		this.title = apiSearchResult.snippet.title;
-		this.description = apiSearchResult.snippet.description;
-		this.videoId = apiSearchResult.id.videoId;
-	}
-
-
-}
+import SearchResultModel from './SearchResultModel.class';
 
 /*@ngInject*/
 export function searchResultModelService() {

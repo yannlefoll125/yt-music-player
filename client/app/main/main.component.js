@@ -5,19 +5,7 @@ const ngRoute = require('angular-route');
 
 import routes from './main.routes';
 import youtubeDataApiService from '../youtubeDataApiService/youtubeDataApiService.service';
-
-
-
-class VideoResultViewModel {
-
-  constructor(title, description, videoId) {
-    this.title = title;
-    this.description = description;
-    this.videoId = videoId;
-
-  }
-
-}
+import VideoResultViewModel from './VideoResultViewModel.class';
 
 export class MainComponent {
 
@@ -26,13 +14,16 @@ export class MainComponent {
 
     var self = this;
 
+    this.searchResultModel = searchResultModel;
+    this.youtubeDataApiService = youtubeDataApiService;
+
     this.searchResults = [];
 
     this.searchResultModelCallback = function(event) {
 
       switch(event) {
         case 'video-item-list-update':
-        self.searchResults = self.videoResultViewModelFromModel(self.searchResultModel);
+        self.searchResults = self.videoResultViewModelFromModel(self.searchResultModel.getVideoItemList());
 
         break;
         default:
@@ -41,17 +32,15 @@ export class MainComponent {
 
     }
 
-
-    this.searchResultModel = searchResultModel;
     this.searchResultModel.addListener(this.searchResultModelCallback);
-    this.searchResults = this.videoResultViewModelFromModel(this.searchResultModel);
-
+    this.searchResults = this.videoResultViewModelFromModel(this.searchResultModel.getVideoItemList());
 
   }
 
-  videoResultViewModelFromModel(model) {
+  videoResultViewModelFromModel(searchResultModelList) {
+
     var searchResults = [];
-    for(var i of model.getVideoItemList()) {
+    for(var i of searchResultModelList) {
 
       searchResults.push(new VideoResultViewModel(i.title, i.description, i.videoId));
     }
