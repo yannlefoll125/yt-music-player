@@ -25,7 +25,7 @@ export function searchResultModelService() {
 	this.getVideoById = function(videoId) {
 	
 		var resultArray = this.videoItemList.filter(function(curr) {
-			if(curr.id.videoId === this) {
+			if(curr.videoId === this) {
 				return true;
 			} else {
 				return false;
