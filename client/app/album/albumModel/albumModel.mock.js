@@ -21,7 +21,7 @@ export function albumModelService() {
 	}
 
 	this.setControllerCallback = function(callback) {
-
+		
 	}
 
 	this.notifyController = function(event) {
