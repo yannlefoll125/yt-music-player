@@ -252,6 +252,41 @@ describe('Service: searchResultModel', function() {
     });
 
     describe('notifyListener', function(){
+      var eventName;
+
+      beforeAll(function() {
+        spyOn(ctrl1, 'callback');
+        spyOn(ctrl2, 'callback');
+
+        eventName = 'eventName';
+      });
+
+      it('should not call any callback when listenerList is empty', function() {
+        searchResultModel.listenerList = [];
+
+        searchResultModel.notifyListener(eventName);
+
+        expect(ctrl1.callback).not.toHaveBeenCalled();
+        expect(ctrl2.callback).not.toHaveBeenCalled();
+      });
+
+      it('should call only ctrl1.callback when listenerList == [ctrl1.callback]', function() {
+        searchResultModel.listenerList = [ctrl1.callback];
+
+        searchResultModel.notifyListener(eventName);
+
+        expect(ctrl1.callback).toHaveBeenCalledWith(eventName);
+        expect(ctrl2.callback).not.toHaveBeenCalled();
+      });
+
+      it('should call ctrl1.callback and ctrl2.callback when listenerList == [ctrl1.callback, ctrl2.callback]', function() {
+        searchResultModel.listenerList = [ctrl1.callback, ctrl2.callback];
+
+        searchResultModel.notifyListener(eventName);
+
+        expect(ctrl1.callback).toHaveBeenCalledWith(eventName);
+        expect(ctrl2.callback).toHaveBeenCalledWith(eventName);
+      });
 
     });
 
