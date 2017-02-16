@@ -48,13 +48,13 @@ export function searchResultModelService() {
 		if(this.listenerList.indexOf(callback) == -1) {
 			this.listenerList.push(callback);
 		}
-		
+
 	}
 
 	this.removeListener = function(callback) {
 		var index = this.listenerList.indexOf(callback);
 		if(index >= 0 && index < this.listenerList.length) {
-			this.listenerList = this.listenerList.splice(index, 1);
+			this.listenerList.splice(index, 1);
 		}
 	}
 

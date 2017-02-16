@@ -155,23 +155,26 @@ describe('Service: searchResultModel', function() {
   });
 
   describe('Observer Pattern', function() {
+
+    var ctrl1 = {
+      callback: function(event) {
+        console.log('ctrl1.callback');
+
+      }
+    };
+
+    var ctrl2 = {
+      callback: function(event) {
+        console.log('ctrl2.callback');
+
+      }
+    };
+
     describe('addListener', function(){
 
       var output, expected;
 
-      var ctrl1 = {
-        callback: function(event) {
-          console.log('ctrl1.callback');
-
-        }
-      };
-
-      var ctrl2 = {
-        callback: function(event) {
-          console.log('ctrl2.callback');
-
-        }
-      };
+      
 
       it('should add ctrl1.callback to searchResultModel.listenerList when it does not contain it and is empty', function() {
         searchResultModel.listenerList = [];
@@ -209,6 +212,42 @@ describe('Service: searchResultModel', function() {
     });
 
     describe('removeListener', function(){
+
+      var output, expected;
+
+      
+
+      it('should not change searchResultModel.listenerList it is empty', function() {
+        searchResultModel.listenerList = [];
+        expected = [];
+
+        searchResultModel.removeListener(ctrl1.callback);
+
+        expect(searchResultModel.listenerList).toEqual(expected);
+
+      });
+
+      it('should not change searchResultModel.listenerList when it does not contain argument callback and isn\'t empty', function() {
+        searchResultModel.listenerList = [ctrl2.callback];
+
+        expected = [ctrl2.callback];
+
+        searchResultModel.removeListener(ctrl1.callback);
+
+        expect(searchResultModel.listenerList).toEqual(expected);
+      });
+
+      it('should remove ctrl1.callback from searchResultModel.listenerList when it contains it', function() {
+        searchResultModel.listenerList = [ctrl1.callback, ctrl2.callback];
+
+        expected = [ctrl2.callback];
+
+        searchResultModel.removeListener(ctrl1.callback);
+
+        expect(searchResultModel.listenerList).toEqual(expected);
+
+
+      });
 
     });
 
