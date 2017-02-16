@@ -259,4 +259,3 @@ describe('Service: albumModel', function() {
   });
   
 });
-8

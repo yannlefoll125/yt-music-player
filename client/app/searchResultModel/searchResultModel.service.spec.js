@@ -124,9 +124,10 @@ describe('Service: searchResultModel', function() {
 
     it('should return null when there is no video with input videoId in videoItemList', function() {
       searchResultModel.videoItemList = [
-        new SearchResultModel('title1', 'description1', 'videoId1'),
-        new SearchResultModel('title2', 'description2', 'videoId2')
+      new SearchResultModel('title1', 'description1', 'videoId1'),
+      new SearchResultModel('title2', 'description2', 'videoId2')
       ];
+
       input = 'videoId3';
       expected = null;
 
@@ -138,9 +139,10 @@ describe('Service: searchResultModel', function() {
 
     it('should return a SearchResultModel with videoId == input when there is a video with input videoId in videoItemList', function() {
       searchResultModel.videoItemList = [
-        new SearchResultModel('title1', 'description1', 'videoId1'),
-        new SearchResultModel('title2', 'description2', 'videoId2')
+      new SearchResultModel('title1', 'description1', 'videoId1'),
+      new SearchResultModel('title2', 'description2', 'videoId2')
       ];
+
       input = 'videoId2';
       expected = new SearchResultModel('title2', 'description2', 'videoId2');
 
@@ -152,19 +154,72 @@ describe('Service: searchResultModel', function() {
 
   });
 
-  describe('addListener', function(){
+  describe('Observer Pattern', function() {
+    describe('addListener', function(){
+
+      var output, expected;
+
+      var ctrl1 = {
+        callback: function(event) {
+          console.log('ctrl1.callback');
+
+        }
+      };
+
+      var ctrl2 = {
+        callback: function(event) {
+          console.log('ctrl2.callback');
+
+        }
+      };
+
+      it('should add ctrl1.callback to searchResultModel.listenerList when it does not contain it and is empty', function() {
+        searchResultModel.listenerList = [];
+        expected = [ctrl1.callback];
+
+        searchResultModel.addListener(ctrl1.callback);
+
+        expect(searchResultModel.listenerList).toEqual(expected);
+
+      });
+
+      it('should add ctrl1.callback to searchResultModel.listenerList when it does not contain it and isn\'t empty', function() {
+        searchResultModel.listenerList = [ctrl2.callback];
+
+        expected = [ctrl2.callback, ctrl1.callback];
+
+        searchResultModel.addListener(ctrl1.callback);
+
+        expect(searchResultModel.listenerList).toEqual(expected);
+      });
+
+      it('should not add ctrl1.callback to searchResultModel.listenerList when it already contains it', function() {
+        searchResultModel.listenerList = [ctrl1.callback];
+
+        expected = [ctrl1.callback];
+
+        searchResultModel.addListener(ctrl1.callback);
+
+        expect(searchResultModel.listenerList).toEqual(expected);
+
+
+      });
+
+
+    });
+
+    describe('removeListener', function(){
+
+    });
+
+    describe('notifyListener', function(){
+
+    });
+
 
   });
 
-  describe('removeListener', function(){
-
-  });
-
-  describe('notifyListener', function(){
-
-  });
-
-
+  
 
 
 });

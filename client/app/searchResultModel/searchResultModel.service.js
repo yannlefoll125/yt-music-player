@@ -45,9 +45,10 @@ export function searchResultModelService() {
 	this.listenerList = [];
 
 	this.addListener = function(callback) {
-
-		this.listenerList.push(callback);
-
+		if(this.listenerList.indexOf(callback) == -1) {
+			this.listenerList.push(callback);
+		}
+		
 	}
 
 	this.removeListener = function(callback) {
@@ -62,6 +63,12 @@ export function searchResultModelService() {
 		for(var callback of this.listenerList) {
 			callback(event);
 		}
+	}
+
+	this.testCallback;
+	this.call = function() {
+		console.log(this.testCallback);
+		this.testCallback('testEvent');
 	}
 };
 
