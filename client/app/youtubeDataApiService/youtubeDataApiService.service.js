@@ -3,7 +3,7 @@ const angular = require('angular');
 
 const YOUTUBE_DATA_API = false;
 
-
+import YoutubeDataApiServiceError from './youtubeDataApiService.error'
 
 /*@ngInject*/
 export function youtubeDataApiService($http) {
@@ -53,7 +53,6 @@ export function youtubeDataApiService($http) {
 
 			}, function error(res) {
 
-				//TODO: manage errors
 				console.error(res);
 			});
 		}
@@ -79,10 +78,11 @@ export function youtubeDataApiService($http) {
 			if(itemList.length > 0) {
 				callback(false, itemList[0]);
 			} else {
-				callback(res);
+				console.log(YoutubeDataApiServiceError.VIDEO_NOT_FOUND);
+				callback(YoutubeDataApiServiceError.VIDEO_NOT_FOUND);
 			}
 		}, function(res) {
-			callback(res);
+			callback(YoutubeDataApiServiceError.API_ERROR);
 		})
 	}
 

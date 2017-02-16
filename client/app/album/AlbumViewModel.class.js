@@ -1,5 +1,7 @@
 'use strict';
 
+import TrackViewModel from './TrackViewModel.class';
+
 export default class AlbumViewModel {
   constructor() {
     this.title = 'default title (ViewModel)';
@@ -15,5 +17,7 @@ export default class AlbumViewModel {
     for(var tm of albumModel.trackList) {
       this.trackList.push(new TrackViewModel(tm));
     }
+
+    console.log(this);
   }
 }
