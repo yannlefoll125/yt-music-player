@@ -18,6 +18,5 @@ export default class AlbumViewModel {
       this.trackList.push(new TrackViewModel(tm));
     }
 
-    console.log(this);
   }
 }

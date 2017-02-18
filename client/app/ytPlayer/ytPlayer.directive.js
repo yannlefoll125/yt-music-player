@@ -10,36 +10,54 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
       control: '='
     },
     link: function(scope, element, attrs) {
-      //element.text('this is the ytPlayer directive');
-
-      //scope.videoId = attrs['videoId'];
-      //scope.playerDiv = element.getElementById('player');
-
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
+      console.log('ytPlayer: link');
       var player;
-      $window.onYouTubeIframeAPIReady = function() {
-        player = new YT.Player(element.children()[0], {
-          height: 80,
-          width: 80*1.77,
-          videoId: '71zwQWWK24U'
-        });
+      
+      var initPlayer = function() {
+        console.log('initPlayer for video: ' + scope.control.videoId);
+
+        function createPlayer(videoId) {
+          player = new YT.Player(element.children()[0], {
+            height: 80,
+            width: 80*1.77,
+            videoId: videoId
+          });
+        }
+
+        var scriptList = document.getElementsByTagName('script');
+        console.log(scriptList);
+        var apiReady = false;
+        for(var tag of scriptList) {
+          if(tag.src === "https://www.youtube.com/iframe_api") {
+            var apiReady = true;
+            break;
+          }
+        }
+
+        if(apiReady) {
+          console.log('onYouTubeIframeAPI already loaded');
+          createPlayer(scope.control.videoId);
+        } else {
+          var tag = document.createElement('script');
+          tag.src = "https://www.youtube.com/iframe_api";
+          var firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+          $window.onYouTubeIframeAPIReady = function() {
+            console.log('onYouTubeIframeAPIReady');
+            createPlayer(scope.control.videoId);
+            var apiReady = true;
+          }
+        }
+        
       }
 
-      function onPlayerReady(event) {
-        event.target.playVideo();
-      }
-
-      function onPlayerStateChange(event) {
-
-      }
+      initPlayer();
 
       scope.control.seekTo = function(/**number: start time in seconds*/ startTime) {
-        console.log('ytPlayer: Start song at ' + startTime + ' seconds')
+        console.log('ytPlayer: Start song at ' + startTime + ' seconds');
+        player.seekTo(startTime, true);
+        player.playVideo();
       }
     }
   };

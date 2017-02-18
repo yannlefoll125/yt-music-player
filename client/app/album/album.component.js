@@ -11,6 +11,7 @@ import TrackViewModel from './TrackViewModel.class';
 export class AlbumComponent {
   /*@ngInject*/
   constructor($routeParams, albumModel, youtubeDataApiService) {
+    console.log('AlbumComponent: constructor start');
     var self = this;
 
     this.youtubeDataApiService = youtubeDataApiService;
@@ -42,9 +43,15 @@ export class AlbumComponent {
     });
 
 
-    this.ytPlayerControl = {};
+    this.ytPlayerControl = {
+      videoId: this.videoId
 
+    };
+    //this.ytPlayerControl.initPlayer(this.videoId);
+    console.log('AlbumComponent: constructor end');
   }
+
+
 
   onTrackSelect(track) {
     console.log('album controller: onTrackSelect()');
