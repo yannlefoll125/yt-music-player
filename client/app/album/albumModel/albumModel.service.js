@@ -37,8 +37,8 @@ export function albumModelService() {
 	}
 
 	this.parseTrackList = function(text) {
-		const timeRegexp = /\d{1,2}:\d{2}/;
-		const numRegexp = /^\d+[\s\.]/;
+		const timeRegexp = /\(?(\d{1,2}:\d{2})\)?/;
+		const numRegexp = /^(\d+)(\s?-\s?|[\s\.])/;
 
 		var lines = text.split('\n');
 
@@ -48,16 +48,19 @@ export function albumModelService() {
 			line = line.trim();
 			var timeResults = line.match(timeRegexp);
 			var numResults = line.match(numRegexp);
-
+			console.log(numResults);
 
 			if(numResults) {
-				var num = numResults[0];
-				line = line.replace(numRegexp, '');
+				var numStringToRemove = numResults[0];
+				var num = numResults[1];
+				line = line.replace(numStringToRemove, '');
 			}
 			
 			if(timeResults) {
-				var time = timeResults[0];
-				line = line.replace(timeRegexp, '');
+				var timeStringToRemove = timeResults[0];
+				var time = timeResults[1];
+
+				line = line.replace(timeStringToRemove, '');
 				//line = line.split(time).join('');
 				time = time.split(':');
 				var timeSeconds = 60 * parseInt(time[0]) + parseInt(time[1]);

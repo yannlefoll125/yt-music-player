@@ -269,6 +269,19 @@ describe('Service: albumModel', function() {
       expect(output).toEqual(expected);
     });
 
+    it('should parse [{N} - {title} {(MM:SS)}]', function() {
+
+      var input = `
+      1 - Exercises in futility I (00:00)
+      2 - Exercises in futility II (07:58)
+      3 - Exercises in futility III (15:47)
+      `;
+
+      var output = albumModel.parseTrackList(input);
+
+      expect(output).toEqual(expected);
+    });
+
   });
   
 });
