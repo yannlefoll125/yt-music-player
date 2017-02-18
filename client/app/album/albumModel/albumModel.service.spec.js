@@ -256,6 +256,19 @@ describe('Service: albumModel', function() {
       expect(output).toEqual(expected);
     });
 
+    it('should parse [{MM:SS} {title}]', function() {
+
+      var input = `
+      00:00 Exercises in futility I
+      07:58 Exercises in futility II 
+      15:47 Exercises in futility III 
+      `;
+
+      var output = albumModel.parseTrackList(input);
+
+      expect(output).toEqual(expected);
+    });
+
   });
   
 });
