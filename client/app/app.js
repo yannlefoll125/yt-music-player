@@ -45,11 +45,13 @@ import searchResultModel from './searchResultModel/searchResultModel.service';
 
 import albumModel from './album/albumModel/albumModel.service';
 
+import ytPlayer from './ytPlayer/ytPlayer.directive';
+
 import './app.less';
 
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel
+   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel, ytPlayer
 
 ])
   .config(routeConfig)
