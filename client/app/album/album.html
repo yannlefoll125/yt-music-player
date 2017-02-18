@@ -5,7 +5,7 @@
 		
 		<div class="col-sm-2">
 			<!--<img src="{{ $ctrl.albumViewModel.thumbnails.default.url }}" alt="" />-->
-			<yt-player></yt-player>
+			<yt-player control="$ctrl.ytPlayerControl"></yt-player>
 		</div>
 		<div class="col-sm-10">
 			<h1>{{ $ctrl.albumViewModel.title }}</h1>
@@ -13,7 +13,7 @@
 			<p>{{ $ctrl.albumViewModel.description }}</p>
 
 			<ul ng-repeat="track in $ctrl.albumViewModel.trackList">
-				<li>{{ track.num }}. {{ track.title }} | {{ track.length }}</li>
+			<li>{{ track.num }}. {{ track.title }} | <a ng-click="$ctrl.onTrackSelect(track)">{{ track.length }}</a></li>
 			</ul>
 		</div>
 

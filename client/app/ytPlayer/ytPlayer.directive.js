@@ -6,6 +6,9 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
   return {
     template: '<div></div>',
     restrict: 'E',
+    scope: {
+      control: '='
+    },
     link: function(scope, element, attrs) {
       //element.text('this is the ytPlayer directive');
 
@@ -19,11 +22,10 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
 
 
       var player;
-
       $window.onYouTubeIframeAPIReady = function() {
         player = new YT.Player(element.children()[0], {
-          height: 360,
-          width: 640,
+          height: 80,
+          width: 80*1.77,
           videoId: '71zwQWWK24U'
         });
       }
@@ -34,6 +36,10 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
 
       function onPlayerStateChange(event) {
 
+      }
+
+      scope.control.seekTo = function(/**number: start time in seconds*/ startTime) {
+        console.log('ytPlayer: Start song at ' + startTime + ' seconds')
       }
     }
   };

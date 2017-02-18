@@ -42,6 +42,13 @@ export class AlbumComponent {
     });
 
 
+    this.ytPlayerControl = {};
+
+  }
+
+  onTrackSelect(track) {
+    console.log('album controller: onTrackSelect()');
+    this.ytPlayerControl.seekTo(track.start);
   }
 }
 
