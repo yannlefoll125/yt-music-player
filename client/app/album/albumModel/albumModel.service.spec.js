@@ -323,6 +323,30 @@ describe('Service: albumModel', function() {
 
       expect(output).toEqual(expected);
     });
-  })
+  });
+
+  describe('parseTrackList no track info', function() {
+    it('should return an empty list', function() {
+      var expected = [];
+
+      var input = `
+      Third full-length album of Mgła, available at :
+
+      http://www.no-solace.com
+      http://www.northern-heritage.net
+
+      http://www.facebook.com/mglaofficial
+
+      Lyrics: http://www.no-solace.com/eif.html
+
+      `;
+
+      var output = albumModel.parseTrackList(input);
+
+      expect(output).toEqual(expected);
+
+    });
+
+  });
 
 });
