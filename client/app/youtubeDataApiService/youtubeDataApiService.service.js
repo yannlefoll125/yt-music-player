@@ -36,7 +36,6 @@ export function youtubeDataApiService($http) {
 		function getNextPage() {
 			loopCount++;
 
-
 			$http.get(url, {params: params}).then(function success(res) {
 				totalResults = res.data.pageInfo.totalResults;
 
@@ -45,8 +44,6 @@ export function youtubeDataApiService($http) {
 				//count number of results
 				resCount += res.data.items.length;
 
-				console.log('totalResults: ' + totalResults + ", resCount: " + resCount);
-
 				if(resCount < resNumber && resCount < totalResults && !!res.data.nextPageToken && loopCount < maxLoop) {
 
 					//Update HTTP request params to fetch the next page
@@ -54,9 +51,10 @@ export function youtubeDataApiService($http) {
 
 					getNextPage();
 				} else {
+					var returnArrayLength = (resCount < resNumber ? resCount : resNumber);
 
 					//When all pages have been fetched, return result to caller
-					callback(false, itemList);
+					callback(false, itemList.slice(0, returnArrayLength));
 				}
 
 
