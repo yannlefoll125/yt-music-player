@@ -36,7 +36,7 @@ export function albumModelService() {
 		this.controllerCallback(event);
 	}
 
-	this.parseTrackList = function(text) {
+	this.parseTrackList = function(text, albumLength=null) {
 		const timeRegexp = /\(?(\d{1,2}:\d{2})\)?/;
 		const numRegexp = /^(\d+)(\s?-\s?|[\s\.])/;
 		const titleStartStripRegexp = /^[\s-]*/;
@@ -102,6 +102,11 @@ export function albumModelService() {
 			previousTrack = new TrackModel(trackNum, t.title, t.time);
 			trackModelList.push(previousTrack);
 			trackNum++;
+		}
+
+		if(albumLength) {
+			var lastTrack = trackModelList[trackModelList.length-1];
+			lastTrack.setLength(albumLength - lastTrack.start);
 		}
 
 		return trackModelList;

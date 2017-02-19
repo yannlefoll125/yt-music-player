@@ -13,6 +13,10 @@ describe('Service: albumModel', function() {
     callback: function(event) {
 
     }
+  };
+
+  jasmine.pp = function(obj) {
+    return JSON.stringify(obj, undefined, 2);
   }
   
 
@@ -36,7 +40,7 @@ describe('Service: albumModel', function() {
       albumModel.notifyController('eventName');
       expect(controllerMock.callback).toHaveBeenCalledWith('eventName');
     })
-  })
+  });
   
 
   describe('set this.model attributes', function(){
@@ -128,9 +132,7 @@ describe('Service: albumModel', function() {
 
   describe('parseTrackList EIF I->III with start, no album length', function() {
 
-    jasmine.pp = function(obj) {
-      return JSON.stringify(obj, undefined, 2);
-    }
+
 
     var expected = [
     new TrackModel(1, 'Exercises in futility I', 0, 478),
@@ -295,6 +297,32 @@ describe('Service: albumModel', function() {
       expect(output).toEqual(expected);
     });
 
+
+
+
   });
-  
+
+  describe('parseTrackList EIF I->III with start, with album length', function() {
+    const ALBUM_LENGTH = 1100;
+
+    var expected = [
+    new TrackModel(1, 'Exercises in futility I', 0, 478),
+    new TrackModel(2, 'Exercises in futility II', 478, 469),
+    new TrackModel(3, 'Exercises in futility III', 947, 153)
+    ];
+
+    it('should parse [{N} - {title} {(MM:SS)}]', function() {
+
+      var input = `
+      1 - Exercises in futility I (00:00)
+      2 - Exercises in futility II (07:58)
+      3 - Exercises in futility III (15:47)
+      `;
+
+      var output = albumModel.parseTrackList(input, ALBUM_LENGTH);
+
+      expect(output).toEqual(expected);
+    });
+  })
+
 });
