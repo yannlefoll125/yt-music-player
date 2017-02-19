@@ -128,6 +128,197 @@ describe('Service: youtubeDataApiService', function() {
 
     });
 
+    it('should return N results when N videos have been found (resultsPerPage < N < 2*resultsPerPage)', function() {
+
+      //we'll return 4 items, and set resultsPerPage to 3 in the response
+
+      var itemList = [{
+        "kind": "youtube#searchResult",
+        "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/NN2AFS2SAiv8T1c5FF2g9ZWHlMk\"",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "71zwQWWK24U"
+        },
+        "snippet": {
+          "publishedAt": "2012-08-22T09:43:11.000Z",
+          "channelId": "UCYaYZQE2pymOZ0k3iaRdgcw",
+          "title": "Mgła - Groza [Full - HD]",
+          "description": "1. Groza I 0:00 2. Groza II 11:22 3. Groza III 18:38 4. Groza IV 26:25 More info/Buy: http://www.cfprod.com/nh/index6.php No copyright is intended. The rights to ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "OdiumNostrum",
+          "liveBroadcastContent": "none"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/NN2AFS2SAiv8T1c5FF2g9ZWHlMk\"",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "71zwQWWK24U"
+        },
+        "snippet": {
+          "publishedAt": "2012-08-22T09:43:11.000Z",
+          "channelId": "UCYaYZQE2pymOZ0k3iaRdgcw",
+          "title": "Mgła - Groza [Full - HD]",
+          "description": "1. Groza I 0:00 2. Groza II 11:22 3. Groza III 18:38 4. Groza IV 26:25 More info/Buy: http://www.cfprod.com/nh/index6.php No copyright is intended. The rights to ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "OdiumNostrum",
+          "liveBroadcastContent": "none"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/NN2AFS2SAiv8T1c5FF2g9ZWHlMk\"",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "71zwQWWK24U"
+        },
+        "snippet": {
+          "publishedAt": "2012-08-22T09:43:11.000Z",
+          "channelId": "UCYaYZQE2pymOZ0k3iaRdgcw",
+          "title": "Mgła - Groza [Full - HD]",
+          "description": "1. Groza I 0:00 2. Groza II 11:22 3. Groza III 18:38 4. Groza IV 26:25 More info/Buy: http://www.cfprod.com/nh/index6.php No copyright is intended. The rights to ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "OdiumNostrum",
+          "liveBroadcastContent": "none"
+        }
+      },
+      {
+        "kind": "youtube#searchResult",
+        "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/NN2AFS2SAiv8T1c5FF2g9ZWHlMk\"",
+        "id": {
+          "kind": "youtube#video",
+          "videoId": "71zwQWWK24U"
+        },
+        "snippet": {
+          "publishedAt": "2012-08-22T09:43:11.000Z",
+          "channelId": "UCYaYZQE2pymOZ0k3iaRdgcw",
+          "title": "Mgła - Groza [Full - HD]",
+          "description": "1. Groza I 0:00 2. Groza II 11:22 3. Groza III 18:38 4. Groza IV 26:25 More info/Buy: http://www.cfprod.com/nh/index6.php No copyright is intended. The rights to ...",
+          "thumbnails": {
+            "default": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/default.jpg",
+              "width": 120,
+              "height": 90
+            },
+            "medium": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/mqdefault.jpg",
+              "width": 320,
+              "height": 180
+            },
+            "high": {
+              "url": "https://i.ytimg.com/vi/71zwQWWK24U/hqdefault.jpg",
+              "width": 480,
+              "height": 360
+            }
+          },
+          "channelTitle": "OdiumNostrum",
+          "liveBroadcastContent": "none"
+        }
+      }];
+
+      var itemList1 = itemList.slice(0, 3);
+      var itemList2 = itemList.slice(3);
+
+      $httpBackend.expectGET(/https:\/\/www\.googleapis\.com\/youtube\/v3\/search.*/).respond(function(method, url, data, headers, params) {
+
+        expect(params.key).toBeDefined();
+        expect(params.part).toBe('snippet');
+        expect(params.q).toBe('groza full album');
+        expect(params.type).toBe('video');
+
+        return [ 200,
+        {
+          "kind": "youtube#searchListResponse",
+          "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/wCtX59ZyZP13b1ljbBQU1vx6Bb8\"",
+          "nextPageToken": "CAUQAA",
+          "regionCode": "FR",
+          "pageInfo": {
+            "totalResults": 4,
+            "resultsPerPage": 3
+          },
+          "items": itemList1
+        }
+        ];
+      });
+
+      $httpBackend.expectGET(/https:\/\/www\.googleapis\.com\/youtube\/v3\/search.*/).respond(function(method, url, data, headers, params) {
+
+        expect(params.key).toBeDefined();
+        expect(params.part).toBe('snippet');
+        expect(params.q).toBe('groza full album');
+        expect(params.type).toBe('video');
+        expect(params.pageToken).toBe('CAUQAA');
+
+        return [ 200,
+        {
+          "kind": "youtube#searchListResponse",
+          "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/wCtX59ZyZP13b1ljbBQU1vx6Bb8\"",
+          "nextPageToken": "LKFJDS",
+          "regionCode": "FR",
+          "pageInfo": {
+            "totalResults": 4,
+            "resultsPerPage": 3
+          },
+          "items": itemList2
+        }
+        ];
+      });
+
+      youtubeDataApiService.searchVideo('groza', ctrl.callback);    
+      $httpBackend.flush();  
+      expect(ctrl.callback).toHaveBeenCalledWith(false, itemList);
+
+    });
+
 
   });
 
