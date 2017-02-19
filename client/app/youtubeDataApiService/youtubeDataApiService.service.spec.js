@@ -21,26 +21,58 @@ describe('Service: youtubeDataApiService', function() {
     expect(!!youtubeDataApiService).toBe(true);
   });
 
+  var ctrl = {
+    callback: function(err, data) {
+
+    }
+  }
+
+  beforeAll(function() {
+    spyOn(ctrl, 'callback');
+  });
+
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  })
+
   describe('searchVideo', function() {
+    it('should return 0 results', function() {
+      $httpBackend.expectGET(/https:\/\/www\.googleapis\.com\/youtube\/v3\/search.*/).respond(function(method, url, data, headers, params) {
+
+        expect(params.key).toBeDefined();
+        expect(params.part).toBe('snippet');
+        expect(params.q).toBe('verisakeet full album');
+        expect(params.type).toBe('video');
+
+        return [ 200,
+        {
+          "kind": "youtube#searchListResponse",
+          "etag": "\"uQc-MPTsstrHkQcRXL3IWLmeNsM/wCtX59ZyZP13b1ljbBQU1vx6Bb8\"",
+          "regionCode": "FR",
+          "pageInfo": {
+            "totalResults": 0,
+            "resultsPerPage": 5
+          },
+          "items": []
+        }
+        ];
+      });
+
+      youtubeDataApiService.searchVideo('verisakeet', ctrl.callback);    
+      $httpBackend.flush();  
+      expect(ctrl.callback).toHaveBeenCalledWith(false, []);
+
+    });
+
+    /*it('should return N results when N == page_size', function() {
+
+    });*/
+
 
   });
 
   describe('getVideoDetail', function() {
-
-    var ctrl = {
-      callback: function(err, data) {
-
-      }
-    }
-
-    beforeAll(function() {
-      spyOn(ctrl, 'callback');
-    });
-
-    afterEach(function() {
-      $httpBackend.verifyNoOutstandingExpectation();
-      $httpBackend.verifyNoOutstandingRequest();
-    })
 
     const VIDEO_URL = API_URL + '/videos';
     var videoId = 'videoId';
@@ -62,7 +94,7 @@ describe('Service: youtubeDataApiService', function() {
         videoId: 'videoId',
         description: 'description'
       };
-      
+
 
       var urlPattern = VIDEO_URL + '\?key=(.+)&part=(.+)&id=(.+)';
 
@@ -102,7 +134,7 @@ describe('Service: youtubeDataApiService', function() {
       };
 
       var expectedError = YoutubeDataApiServiceError.VIDEO_NOT_FOUND;
-      
+
 
       var urlPattern = VIDEO_URL + '\?key=(.+)&part=(.+)&id=(.+)';
 
@@ -134,7 +166,7 @@ describe('Service: youtubeDataApiService', function() {
       var res = {};
 
       var expectedError = YoutubeDataApiServiceError.API_ERROR;
-      
+
 
       var urlPattern = VIDEO_URL + '\?key=(.+)&part=(.+)&id=(.+)';
 
@@ -160,7 +192,7 @@ describe('Service: youtubeDataApiService', function() {
       expect(ctrl.callback).toHaveBeenCalledWith(expectedError);
 
     });
-    
+
   });
 
 });

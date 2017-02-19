@@ -23,25 +23,34 @@ export function youtubeDataApiService($http) {
 		var params = {
 			key: API_KEY,
 			part: "snippet",
-			q: query.toString() + "full album",
+			q: query.toString() + " full album",
 			type: "video"
 		};
 
+		var loopCount = 0;
+		var maxLoop = 20;
+
+		var totalResults;
 		//function to call to get next page of result. Call once directly to start to get
 		//results from the API, then called from the $http.get callback to call next page.
 		function getNextPage() {
+			loopCount++;
+
+
 			$http.get(url, {params: params}).then(function success(res) {
+				totalResults = res.data.pageInfo.totalResults;
 
 				itemList = itemList.concat(res.data.items);
 
 				//count number of results
 				resCount += res.data.items.length;
 
-				if(resCount < resNumber) {
+				console.log('totalResults: ' + totalResults + ", resCount: " + resCount);
+
+				if(resCount < resNumber && resCount < totalResults && !!res.data.nextPageToken && loopCount < maxLoop) {
 
 					//Update HTTP request params to fetch the next page
 					params.pageToken = res.data.nextPageToken;
-
 
 					getNextPage();
 				} else {
