@@ -36,7 +36,10 @@ export function albumModelService() {
 		this.controllerCallback(event);
 	}
 
-	this.parseTrackList = function(text, albumLength=null) {
+	/**
+		Takes a multiline text and returns a list of TrackViewModel if it finds track info
+	*/
+	this.parseTrackList = function(/** string */ text, /** number */ albumLength=null) {
 		const timeRegexp = /\(?(\d{1,2}:\d{2})\)?/;
 		const numRegexp = /^(\d+)(\s?-\s?|[\s\.])/;
 		const titleStartStripRegexp = /^[\s-]*/;
@@ -47,39 +50,53 @@ export function albumModelService() {
 		var trackList = [];
 
 		for(var line of lines) {
+			//Remove start and trailing spaces
 			line = line.trim();
+
+			//look for start times
 			var timeResults = line.match(timeRegexp);
+
+			//Look to track number
 			var numResults = line.match(numRegexp);
 			
 			if(numResults) {
+				//The first element of the result array is the raw regexp match
+				//It will be striped from the line
 				var numStringToRemove = numResults[0];
+
+				//First group match: represents the number (should only represent a number)
 				var num = numResults[1];
+
 				line = line.replace(numStringToRemove, '');
 			}
 			
+			//The line is considered to represent a track only if we can find a MM:SS start timer
 			if(timeResults) {
+
 				var timeStringToRemove = timeResults[0];
 				var time = timeResults[1];
 
+				//Remove the timer string
 				line = line.replace(timeStringToRemove, '');
+
+				//Remove start and trailing symboles (spaces, dash etc, see titleStartStripRegexp)
 				line = line.replace(titleStartStripRegexp, '');
 				line = line.replace(titleEndStripRegexp, '');
-				//line = line.split(time).join('');
+
+				//Convert start timer in seconds
 				time = time.split(':');
 				var timeSeconds = 60 * parseInt(time[0]) + parseInt(time[1]);
 
+				//add track to temp track list
 				trackList.push({
 					title: line,
 					time: timeSeconds
 				});
 
 			}
-
-
-
-
 		}
 
+		//Sort track list according to ascending start timer
 		var sortedTrackList = trackList.sort((a, b) => {
 			if(a.time > b.time) {
 				return 1;
@@ -95,6 +112,10 @@ export function albumModelService() {
 		var trackNum = 1;
 		var trackModelList = []
 		var previousTrack = null;
+
+		//Now that tracks are sorted, create a list of TrackViewModel
+		//At each iteration, calculate the previous track length using
+		//the current track start time and the previous track start time
 		for(var t of sortedTrackList) {
 			if(previousTrack) {
 				previousTrack.setLength(t.time - previousTrack.start);
@@ -104,6 +125,7 @@ export function albumModelService() {
 			trackNum++;
 		}
 
+		//If given as parameter, use the album length to calculate the last track length
 		if(albumLength) {
 			var lastTrack = trackModelList[trackModelList.length-1];
 			lastTrack.setLength(albumLength - lastTrack.start);
