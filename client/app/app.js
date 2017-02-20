@@ -47,11 +47,13 @@ import albumModel from './album/albumModel/albumModel.service';
 
 import ytPlayer from './ytPlayer/ytPlayer.directive';
 
+import secToMinSec from './secToMinSec/secToMinSec.filter';
+
 import './app.less';
 
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
-   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel, ytPlayer
+   main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel, ytPlayer, secToMinSec
 
 ])
   .config(routeConfig)

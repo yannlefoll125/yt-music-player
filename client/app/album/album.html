@@ -13,7 +13,7 @@
 			<p>{{ $ctrl.albumViewModel.description }}</p>
 
 			<ul ng-repeat="track in $ctrl.albumViewModel.trackList">
-			<li>{{ track.num }}. {{ track.title }} | <a ng-click="$ctrl.onTrackSelect(track)">{{ track.length }}</a></li>
+			<li>{{ track.num }}. {{ track.title }} | <a ng-click="$ctrl.onTrackSelect(track)">{{ track.length | secToMinSec }}</a></li>
 			</ul>
 		</div>
 
