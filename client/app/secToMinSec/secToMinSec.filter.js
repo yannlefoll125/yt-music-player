@@ -11,15 +11,7 @@ export function secToMinSecFilter() {
   	var min = Math.floor(input / 60);
   	var sec = input % 60;
 
-  	var secStr;
-
-  	if(sec < 10) {
-  		secStr = '0' + sec; 
-  	} else {
-  		secStr = '' + sec;
-  	}
-
-    return min + ':' + secStr;
+    return min + ':' + (sec < 10 ? '0' + sec : '' + sec);
   };
 }
 
