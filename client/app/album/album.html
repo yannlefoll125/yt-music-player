@@ -1,13 +1,16 @@
 <div class="container-fluid">
 
-
 	<div class="row">
-		
-		<div class="col-sm-2">
+	<div class="col-sm-12">
 			<!--<img src="{{ $ctrl.albumViewModel.thumbnails.default.url }}" alt="" />-->
 			<yt-player control="$ctrl.ytPlayerControl" videoId="$ctrl.videoId"></yt-player>
 		</div>
-		<div class="col-sm-10">
+	</div>
+
+	<div class="row">
+		
+		
+		<div class="col-sm-12">
 			<h1>{{ $ctrl.albumViewModel.title }}</h1>
 
 			<p ng-if="$ctrl.albumViewModel.trackList.length <= 0">{{ $ctrl.albumViewModel.description }}</p>

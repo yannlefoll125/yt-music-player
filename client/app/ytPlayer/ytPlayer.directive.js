@@ -4,7 +4,7 @@ const angular = require('angular');
 export default angular.module('ytMusicPlayerApp.ytPlayer', [])
 .directive('ytPlayer', ['$window', function($window) {
   return {
-    template: '<div></div>',
+    template: '<div class="youtube-player"></div>',
     restrict: 'E',
     scope: {
       control: '='
@@ -18,9 +18,11 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
 
         function createPlayer(videoId) {
           player = new YT.Player(element.children()[0], {
-            height: 80,
-            width: 80*1.77,
-            videoId: videoId
+
+            videoId: videoId,
+            playVars: {
+              html5: 1
+            }
           });
         }
 
