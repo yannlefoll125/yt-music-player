@@ -56,13 +56,19 @@ export class AlbumComponent {
   onTrackSelect(track) {
     console.log('album controller: onTrackSelect()');
     this.ytPlayerControl.seekTo(track.start);
+    this.albumViewModel.setActiveTrack(track.num);
   }
 
   onPlayClick() {
     var self = this;
-    this.albumModel.play(function() {
+    var currentTime = this.ytPlayerControl.getCurrentTime();
+
+    
+    this.albumModel.play(currentTime, function(trackNumber) {
       self.showPlayButton = false;
       self.ytPlayerControl.play();
+      
+      self.albumViewModel.setActiveTrack(trackNumber);
     });
   }
 
@@ -77,20 +83,25 @@ export class AlbumComponent {
   onPreviousClick() {
     var self = this;
     var currentTime = this.ytPlayerControl.getCurrentTime();
-    this.albumModel.previous(currentTime, function(trackStart) {
+    this.albumModel.previous(currentTime, function(trackNumber, trackStart) {
       self.ytPlayerControl.seekTo(trackStart);
-
+      self.albumViewModel.setActiveTrack(trackNumber);
+      console.log(self.albumViewModel.trackList);
     });
   }
 
   onNextClick() {
     var self = this;
     var currentTime = this.ytPlayerControl.getCurrentTime();
-    this.albumModel.next(currentTime, function(trackStart) {
+    this.albumModel.next(currentTime, function(trackNumber, trackStart) {
       self.ytPlayerControl.seekTo(trackStart);
-
+      self.albumViewModel.setActiveTrack(trackNumber);
+      console.log(self.albumViewModel.trackList);
     });
   }
+
+
+
 }
 
 AlbumComponent.$inject = ['$routeParams', 'albumModel', 'youtubeDataApiService'];

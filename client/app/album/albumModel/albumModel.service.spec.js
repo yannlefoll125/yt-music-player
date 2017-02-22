@@ -372,24 +372,30 @@ describe('Service: albumModel', function() {
 
 
     describe('play()', function() {
-      it('should tell the controller to play if playerState == PlayerState.PAUSED', function() {
+
+      beforeEach(function() {
+        albumModel.model = album;
+      });
+      
+      it('should tell the controller to play if playerState == PlayerState.PAUSED, and callback should return the track number', function() {
         albumModel.playerState = PlayerStates.PAUSED;
+        var elapsed = 400;
 
-        albumModel.play(ctrl.callback);
+        albumModel.play(elapsed, ctrl.callback);
 
-        expect(ctrl.callback).toHaveBeenCalledWith();
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].num);
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
 
         
       });
 
-      it('should tell the controller to play if playerState == PlayerState.STOPPED', function() {
+      it('should tell the controller to play if playerState == PlayerState.STOPPED, , and callback should return the track number', function() {
         albumModel.playerState = PlayerStates.STOPPED;
+        var elapsed = 400;
 
+        albumModel.play(elapsed, ctrl.callback);
 
-        albumModel.play(ctrl.callback);
-
-        expect(ctrl.callback).toHaveBeenCalledWith();
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].num);
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
 
         
@@ -397,9 +403,9 @@ describe('Service: albumModel', function() {
 
       it('should not call the callback if the player is already in PLAYING state', function() {
         albumModel.playerState = PlayerStates.PLAYING;
+        var elapsed = 400;
 
-
-        albumModel.play(ctrl.callback);
+        albumModel.play(elapsed, ctrl.callback);
 
         expect(ctrl.callback).not.toHaveBeenCalled();
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);

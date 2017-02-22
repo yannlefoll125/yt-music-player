@@ -6,5 +6,6 @@ export default class TrackViewModel {
     this.title = trackModel.title;
     this.length = trackModel.length;
     this.start = trackModel.start;
+    this.active = false;
   }
 }

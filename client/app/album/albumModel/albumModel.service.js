@@ -39,26 +39,9 @@ export function albumModelService() {
 
 	//Player logic
 	this.playerState = PlayerStates.STOPPED;
-	//this.currentTrack = this.model.trackList[0];
-
-	this.play = function(callback) {
-		if(this.playerState == PlayerStates.PAUSED || this.playerState == PlayerStates.STOPPED) {
-			this.playerState = PlayerStates.PLAYING;
-
-			callback();
-		}
-	}
-
-	this.pause = function(callback) {
-		if(this.playerState == PlayerStates.PLAYING) {
-			this.playerState = PlayerStates.PAUSED;
-
-			callback();
-		}
-	}
 
 	/**
-		Find track in the track list corresponding to elapsed _time_ in the video in seconds
+	Find track in the track list corresponding to elapsed _time_ in the video in seconds
 	*/
 	this.findTrack = function(/** number in seconds */ elapsed) {
 		const trackNumber = this.model.trackList.length;
@@ -69,9 +52,27 @@ export function albumModelService() {
 				return this.model.trackList[i];
 
 			}
-			
+
 		}	
 		return this.model.trackList[trackNumber-1];
+	}
+
+	this.play = function(elapsed, callback) {
+
+		if(this.playerState == PlayerStates.PAUSED || this.playerState == PlayerStates.STOPPED) {
+			this.playerState = PlayerStates.PLAYING;
+			var track = this.findTrack(elapsed);
+
+			callback(track.num);
+		}
+	}
+
+	this.pause = function(callback) {
+		if(this.playerState == PlayerStates.PLAYING) {
+			this.playerState = PlayerStates.PAUSED;
+
+			callback();
+		}
 	}
 
 	this.previous = function(elapsed, callback) {
@@ -93,18 +94,18 @@ export function albumModelService() {
 
 	/**
 		Takes a multiline text and returns a list of TrackViewModel if it finds track info
-	*/
-	this.parseTrackList = function(/** string */ text, /** number */ albumLength=null) {
-		const timeRegexp = /\(?(\d{1,2}:\d{2})\)?/;
-		const numRegexp = /^(\d+)(\s?-\s?|[\s\.])/;
-		const titleStartStripRegexp = /^[\s-]*/;
-		const titleEndStripRegexp = /[\s-]*$/;
+		*/
+		this.parseTrackList = function(/** string */ text, /** number */ albumLength=null) {
+			const timeRegexp = /\(?(\d{1,2}:\d{2})\)?/;
+			const numRegexp = /^(\d+)(\s?-\s?|[\s\.])/;
+			const titleStartStripRegexp = /^[\s-]*/;
+			const titleEndStripRegexp = /[\s-]*$/;
 
-		var lines = text.split('\n');
+			var lines = text.split('\n');
 
-		var trackList = [];
+			var trackList = [];
 
-		for(var line of lines) {
+			for(var line of lines) {
 			//Remove start and trailing spaces
 			line = line.trim();
 

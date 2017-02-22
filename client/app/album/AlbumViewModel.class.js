@@ -21,12 +21,28 @@ export default class AlbumViewModel {
   }
 
   findTrackViewModelByNumber(number) {
-    var foundTrack;
 
     for(var t of this.trackList) {
       if(t.num == number) {
         return t;
       }
+    }
+  }
+
+  findTrackViewModelIndexByNumber(number) {
+    const trackNumber = this.trackList.length;
+
+    for(var i = 0; i < trackNumber; i++) {
+      if(this.trackList[i].num == number) {
+        return i;
+      }
+    }
+  }
+
+  setActiveTrack(trackNumber) {
+    for(var t of this.trackList) {
+
+      t.active = t.num == trackNumber;
     }
   }
 }
