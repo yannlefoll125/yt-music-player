@@ -3,6 +3,7 @@
 import albumModelService from './albumModel.service';
 import TrackModel from './TrackModel.class';
 import AlbumModel from './AlbumModel.class';
+import PlayerStates from './PlayerStates.enum';
 
 describe('Service: albumModel', function() {
 
@@ -348,5 +349,54 @@ describe('Service: albumModel', function() {
     });
 
   });
+
+  describe('Player buttons actions on model', function() {
+
+    var album = new AlbumModel();
+    album.title = "Exercises in futility";
+    album.trackList = [
+    new TrackModel(1, 'Exercises in futility I', 0, 478),
+    new TrackModel(2, 'Exercises in futility II', 478, 469),
+    new TrackModel(3, 'Exercises in futility III', 947, 153)
+    ];
+
+    var ctrl = {
+      callback: function(event, data) {
+
+      }
+    }
+
+    beforeAll(function() {
+      spyOn(ctrl, 'callback');
+    })
+
+
+    describe('play()', function() {
+      it('should tell the controller to play the current track if playerState == PlayerState.PAUSED', function() {
+        albumModel.playerState = PlayerStates.PAUSED;
+        albumModel.currentTrack = album.trackList[1];
+
+        albumModel.play(ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.currentTrack.num);
+        expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
+        expect(albumModel.currentTrack).toEqual(album.trackList[1]);
+        
+      });
+
+      it('should tell the controller to play the current track if playerState == PlayerState.STOPPED', function() {
+        albumModel.playerState = PlayerStates.STOPPED;
+        albumModel.currentTrack = album.trackList[1];
+
+        albumModel.play(ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.currentTrack.num);
+        expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
+        expect(albumModel.currentTrack).toEqual(album.trackList[1]);
+        
+      });
+
+    });
+  })
 
 });

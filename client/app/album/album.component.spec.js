@@ -58,6 +58,27 @@ describe('Component: AlbumComponent', function() {
     expect(youtubeDataApiService.getVideoDetail).toHaveBeenCalled();
   });
 
+  xdescribe('Player buttons', function() {
+
+    describe('onPreviousClick()', function() {
+
+    });
+
+    describe('onPlayClick()', function() {
+
+    });
+
+    describe('onPauseClick()', function() {
+
+    });
+
+    describe('onNextClick()', function() {
+
+    });
+
+
+  })
+
 
 
 });

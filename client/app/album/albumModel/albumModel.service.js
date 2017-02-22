@@ -3,6 +3,7 @@ const angular = require('angular');
 
 import TrackModel from './TrackModel.class';
 import AlbumModel from './AlbumModel.class';
+import PlayerStates from './PlayerStates.enum';
 
 /*@ngInject*/
 export function albumModelService() {
@@ -34,6 +35,18 @@ export function albumModelService() {
 
 	this.notifyController = function(event) {
 		this.controllerCallback(event);
+	}
+
+	//Player logic
+	this.playerState = PlayerStates.STOPPED;
+	this.currentTrack = this.model.trackList[0];
+
+	this.play = function(callback) {
+		if(this.playerState == PlayerStates.PAUSED || this.playerState == PlayerStates.STOPPED) {
+			this.playerState = PlayerStates.PLAYING;
+
+			callback(this.currentTrack.num);
+		}
 	}
 
 	/**
