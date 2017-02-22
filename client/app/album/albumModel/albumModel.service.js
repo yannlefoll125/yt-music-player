@@ -58,20 +58,33 @@ export function albumModelService() {
 	}
 
 	/**
-		Find track in the track list corresponding to _time_ elapsed in the video in seconds
+		Find track in the track list corresponding to elapsed _time_ in the video in seconds
 	*/
-	this.findTrack = function(/** number in seconds */ time) {
+	this.findTrack = function(/** number in seconds */ elapsed) {
 		const trackNumber = this.model.trackList.length;
 
 		for(var i = 0; i < trackNumber - 1; i++) {
 
-			if(time >= this.model.trackList[i].start && time < this.model.trackList[i+1].start) {				
+			if(elapsed >= this.model.trackList[i].start && elapsed < this.model.trackList[i+1].start) {				
 				return this.model.trackList[i];
 
 			}
 			
 		}	
 		return this.model.trackList[trackNumber-1];
+	}
+
+	this.previous = function(elapsed, callback) {
+		var currentTrack = this.findTrack(elapsed);
+		var previousTrackNumber;
+
+		if(currentTrack.num == 1) {
+			previousTrackNumber = 1;
+		} else {
+			previousTrackNumber = currentTrack.num - 1;
+		}
+
+		callback(previousTrackNumber);
 	}
 
 

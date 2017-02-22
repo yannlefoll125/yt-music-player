@@ -361,7 +361,7 @@ describe('Service: albumModel', function() {
     ];
 
     var ctrl = {
-      callback: function(event, data) {
+      callback: function(...args) {
 
       }
     }
@@ -445,13 +445,7 @@ describe('Service: albumModel', function() {
     });
 
     describe('findTrack()', function() {
-      var album = new AlbumModel();
-      album.title = "Exercises in futility";
-      album.trackList = [
-      new TrackModel(1, 'Exercises in futility I', 0, 478),
-      new TrackModel(2, 'Exercises in futility II', 478, 469),
-      new TrackModel(3, 'Exercises in futility III', 947, 153)
-      ];
+      
 
       beforeEach(function() {
         albumModel.model = album;
@@ -502,7 +496,28 @@ describe('Service: albumModel', function() {
 
     });
 
-    xdescribe('previous()', function() {
+    describe('previous()', function() {
+      beforeEach(function() {
+        albumModel.model = album;
+      });
+
+      it('should call the controller callback with the current track number when it is the first track', function() {
+        albumModel.previous(420, ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].num);
+      });
+
+      it('should call the controller callback with the previous track number when it is not the first track (2 -> 1)', function() {
+        albumModel.previous(500, ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].num);
+      });
+
+      it('should call the controller callback with the previous track number when it is not the first track (3 -> 2)', function() {
+        albumModel.previous(1000, ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[1].num);
+      });
 
     });
 
