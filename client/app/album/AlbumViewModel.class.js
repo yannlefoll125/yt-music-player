@@ -19,4 +19,14 @@ export default class AlbumViewModel {
     }
 
   }
+
+  findTrackViewModelByNumber(number) {
+    var foundTrack;
+
+    for(var t of this.trackList) {
+      if(t.num == number) {
+        return t;
+      }
+    }
+  }
 }

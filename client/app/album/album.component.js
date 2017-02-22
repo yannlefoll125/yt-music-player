@@ -73,6 +73,15 @@ export class AlbumComponent {
       self.ytPlayerControl.pause();
     });
   }
+
+  onPreviousClick() {
+    var self = this;
+    var currentTime = this.ytPlayerControl.getCurrentTime();
+    var trackToPlay;
+    this.albumModel.previous(currentTime, function(trackNumber) {
+
+    });
+  }
 }
 
 AlbumComponent.$inject = ['$routeParams', 'albumModel', 'youtubeDataApiService'];

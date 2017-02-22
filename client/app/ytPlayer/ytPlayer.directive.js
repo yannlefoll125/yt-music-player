@@ -69,6 +69,10 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
       scope.control.pause = function() {
         player.pauseVideo();
       }
+
+      scope.control.getCurrentTime = function() {
+        return player.getCurrentTime();
+      }
     }
   };
 }])
