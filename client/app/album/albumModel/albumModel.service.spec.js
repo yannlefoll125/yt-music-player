@@ -501,22 +501,25 @@ describe('Service: albumModel', function() {
         albumModel.model = album;
       });
 
-      it('should call the controller callback with the current track start time when it is the first track', function() {
+      it('should call the controller callback with the current track number and start time when it is the first track', function() {
         albumModel.previous(420, ctrl.callback);
+        var track = albumModel.model.trackList[0];
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].start);
+        expect(ctrl.callback).toHaveBeenCalledWith(track.num, track.start);
       });
 
       it('should call the controller callback with the previous track start time when it is not the first track (2 -> 1)', function() {
         albumModel.previous(500, ctrl.callback);
+        var track = albumModel.model.trackList[0];
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].start);
+        expect(ctrl.callback).toHaveBeenCalledWith(track.num, track.start);
       });
 
       it('should call the controller callback with the previous track start time when it is not the first track (3 -> 2)', function() {
         albumModel.previous(1000, ctrl.callback);
+        var track = albumModel.model.trackList[1];
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[1].start);
+        expect(ctrl.callback).toHaveBeenCalledWith(track.num, track.start);
       });
 
     });
@@ -530,20 +533,23 @@ describe('Service: albumModel', function() {
 
       it('should call the controller callback with the current track start time when it is the last track', function() {
         albumModel.next(1000, ctrl.callback);
+        var track = albumModel.model.trackList[2];
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[2].start);
+        expect(ctrl.callback).toHaveBeenCalledWith(track.num, track.start);
       });
 
       it('should call the controller callback with the next track start time when it is not the first track (1 -> 2)', function() {
         albumModel.next(400, ctrl.callback);
+        var track = albumModel.model.trackList[1];
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[1].start);
+        expect(ctrl.callback).toHaveBeenCalledWith(track.num, track.start);
       });
 
       it('should call the controller callback with the next track start time when it is not the first track (2 -> 3)', function() {
         albumModel.next(500, ctrl.callback);
+        var track = albumModel.model.trackList[2];
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[2].start);
+        expect(ctrl.callback).toHaveBeenCalledWith(track.num, track.start);
       });
     });
 

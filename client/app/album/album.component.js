@@ -77,8 +77,17 @@ export class AlbumComponent {
   onPreviousClick() {
     var self = this;
     var currentTime = this.ytPlayerControl.getCurrentTime();
-    var trackToPlay;
-    this.albumModel.previous(currentTime, function(trackNumber) {
+    this.albumModel.previous(currentTime, function(trackStart) {
+      self.ytPlayerControl.seekTo(trackStart);
+
+    });
+  }
+
+  onNextClick() {
+    var self = this;
+    var currentTime = this.ytPlayerControl.getCurrentTime();
+    this.albumModel.next(currentTime, function(trackStart) {
+      self.ytPlayerControl.seekTo(trackStart);
 
     });
   }

@@ -77,14 +77,16 @@ export function albumModelService() {
 	this.previous = function(elapsed, callback) {
 		var currentTrack = this.findTrack(elapsed);
 		var previousIndex = currentTrack.num == 1 ? 0 : currentTrack.num - 2;
-		callback(this.model.trackList[previousIndex].start);
+		var previousTrack = this.model.trackList[previousIndex];
+		callback(previousTrack.num, previousTrack.start);
 	}
 
 	this.next = function(elapsed, callback) {
 		var currentTrack = this.findTrack(elapsed);
 		var trackNumber = this.model.trackList.length;
 		var nextIndex = currentTrack.num == trackNumber ? trackNumber - 1 : currentTrack.num;
-		callback(this.model.trackList[nextIndex].start);
+		var nextTrack = this.model.trackList[nextIndex];
+		callback(nextTrack.num, nextTrack.start);
 	}
 
 
