@@ -474,9 +474,9 @@ gulp.task('build', cb => {
         ],
         'inject',
         'transpile:server',
-        [
+        /*[
             'build:images'
-        ],
+        ],*/
         [
             'copy:extras',
             'copy:assets',
@@ -491,6 +491,10 @@ gulp.task('build', cb => {
 gulp.task('clean:dist', () => del([`${paths.dist}/!(.git*|.openshift|Procfile)**`], {dot: true}));
 
 gulp.task('build:images', () => {
+    console.log(`${paths.dist}/${clientPath}/assets/images`);
+    console.log(`${paths.dist}/${paths.client.revManifest}`);
+    console.log(`${paths.dist}/${clientPath}/assets`);
+
     return gulp.src(paths.client.images)
         .pipe(plugins.imagemin([
             plugins.imagemin.optipng({optimizationLevel: 5}),

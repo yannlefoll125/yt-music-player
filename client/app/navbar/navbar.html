@@ -1,4 +1,4 @@
-<div class="navbar navbar-default navbar-static-top">
+<div class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" ng-click="$ctrl.isCollapsed = !$ctrl.isCollapsed">
@@ -23,9 +23,9 @@
           <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
 
-        <li>
+        <li class="search-li">
           <!-- Stylish input based on http://bootsnipp.com/snippets/featured/stylish-input-using-icon-font -->
-          <div class="input-group stylish-input-group">
+          <div class="input-group stylish-input-group navbar-form">
             <input type="text" class="form-control"  placeholder="Search artist" ng-model="$ctrl.searchQuery" ng-keyup="$event.keyCode === 13 && $ctrl.onSearchSubmit()" >
             <span class="input-group-addon">
               <button type="submit" ng-click="$ctrl.onSearchSubmit()">
