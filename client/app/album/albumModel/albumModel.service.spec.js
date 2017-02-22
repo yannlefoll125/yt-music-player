@@ -372,43 +372,87 @@ describe('Service: albumModel', function() {
 
 
     describe('play()', function() {
-      it('should tell the controller to play the current track if playerState == PlayerState.PAUSED', function() {
+      it('should tell the controller to play if playerState == PlayerState.PAUSED', function() {
         albumModel.playerState = PlayerStates.PAUSED;
-        albumModel.currentTrack = album.trackList[1];
 
         albumModel.play(ctrl.callback);
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.currentTrack.num);
+        expect(ctrl.callback).toHaveBeenCalledWith();
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
-        expect(albumModel.currentTrack).toEqual(album.trackList[1]);
+
         
       });
 
-      it('should tell the controller to play the current track if playerState == PlayerState.STOPPED', function() {
+      it('should tell the controller to play if playerState == PlayerState.STOPPED', function() {
         albumModel.playerState = PlayerStates.STOPPED;
-        albumModel.currentTrack = album.trackList[1];
+
 
         albumModel.play(ctrl.callback);
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.currentTrack.num);
+        expect(ctrl.callback).toHaveBeenCalledWith();
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
-        expect(albumModel.currentTrack).toEqual(album.trackList[1]);
+
         
       });
 
       it('should not call the callback if the player is already in PLAYING state', function() {
         albumModel.playerState = PlayerStates.PLAYING;
-        albumModel.currentTrack = album.trackList[1];
+
 
         albumModel.play(ctrl.callback);
 
         expect(ctrl.callback).not.toHaveBeenCalled();
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
-        expect(albumModel.currentTrack).toEqual(album.trackList[1]);
+
         
       });
 
     });
+
+    describe('pause()', function() {
+      it('should tell the controller to pause if playerState == PlayerState.PLAYING', function() {
+        albumModel.playerState = PlayerStates.PLAYING;
+
+
+        albumModel.pause(ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith();
+        expect(albumModel.playerState).toBe(PlayerStates.PAUSED);
+
+      });
+
+      it('should should not call the callback if playerState == PlayerState.STOPPED, and remain in STOPPED state', function() {
+        albumModel.playerState = PlayerStates.STOPPED;
+
+        albumModel.pause(ctrl.callback);
+
+        expect(ctrl.callback).not.toHaveBeenCalled();
+        expect(albumModel.playerState).toBe(PlayerStates.STOPPED);
+
+        
+      });
+
+      it('should not call the callback if the player is already in PAUSED state', function() {
+        albumModel.playerState = PlayerStates.PAUSED;
+
+        albumModel.pause(ctrl.callback);
+
+        expect(ctrl.callback).not.toHaveBeenCalled();
+        expect(albumModel.playerState).toBe(PlayerStates.PAUSED);
+
+        
+      });
+    });
+
+    xdescribe('previous()', function() {
+
+    });
+
+    xdescribe('next()', function() {
+
+    });
+
+
   })
 
 });

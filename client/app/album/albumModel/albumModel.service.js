@@ -39,18 +39,25 @@ export function albumModelService() {
 
 	//Player logic
 	this.playerState = PlayerStates.STOPPED;
-	this.currentTrack = this.model.trackList[0];
+	//this.currentTrack = this.model.trackList[0];
 
 	this.play = function(callback) {
 		if(this.playerState == PlayerStates.PAUSED || this.playerState == PlayerStates.STOPPED) {
 			this.playerState = PlayerStates.PLAYING;
 
-			callback(this.currentTrack.num);
-		} else {
-			console.log('already playing');
-			return;
+			callback();
 		}
 	}
+
+	this.pause = function(callback) {
+		if(this.playerState == PlayerStates.PLAYING) {
+			this.playerState = PlayerStates.PAUSED;
+
+			callback();
+		}
+	}
+
+
 
 	/**
 		Takes a multiline text and returns a list of TrackViewModel if it finds track info

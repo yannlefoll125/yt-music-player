@@ -9,8 +9,8 @@
 
 	<div class="row player-command-buttons">
 		<button class="previous-btn" ng-click="$ctrl.onPreviousClick()">Prev.</button>
-		<button class="play-btn" ng-click="$ctrl.onPlayClick()" ng-show="$ctrl.playerState == 'playing'">Play</button>
-		<button class="pause-btn" ng-click="$ctrl.onPauseClick()" ng-show="$ctrl.playerState == 'pause'">Pause</button>
+		<button class="play-btn" ng-click="$ctrl.onPlayClick()" ng-show="$ctrl.showPlayButton">Play</button>
+		<button class="pause-btn" ng-click="$ctrl.onPauseClick()" ng-show="!$ctrl.showPlayButton">Pause</button>
 		<button class="next-btn" ng-click="$ctrl.onNextClick()">Next</button>
 
 

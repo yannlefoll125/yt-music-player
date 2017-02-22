@@ -61,6 +61,14 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
         player.seekTo(startTime, true);
         player.playVideo();
       }
+
+      scope.control.play = function() {
+        player.playVideo();
+      }
+
+      scope.control.pause = function() {
+        player.pauseVideo();
+      }
     }
   };
 }])

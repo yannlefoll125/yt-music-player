@@ -42,7 +42,7 @@ export class AlbumComponent {
       
     });
 
-
+    this.showPlayButton = true;
     this.ytPlayerControl = {
       videoId: this.videoId
 
@@ -56,6 +56,22 @@ export class AlbumComponent {
   onTrackSelect(track) {
     console.log('album controller: onTrackSelect()');
     this.ytPlayerControl.seekTo(track.start);
+  }
+
+  onPlayClick() {
+    var self = this;
+    this.albumModel.play(function() {
+      self.showPlayButton = false;
+      self.ytPlayerControl.play();
+    });
+  }
+
+  onPauseClick() {
+    var self = this;
+    this.albumModel.pause(function() {
+      self.showPlayButton = true;
+      self.ytPlayerControl.pause();
+    });
   }
 }
 
