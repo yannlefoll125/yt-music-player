@@ -444,6 +444,64 @@ describe('Service: albumModel', function() {
       });
     });
 
+    describe('findTrack()', function() {
+      var album = new AlbumModel();
+      album.title = "Exercises in futility";
+      album.trackList = [
+      new TrackModel(1, 'Exercises in futility I', 0, 478),
+      new TrackModel(2, 'Exercises in futility II', 478, 469),
+      new TrackModel(3, 'Exercises in futility III', 947, 153)
+      ];
+
+      beforeEach(function() {
+        albumModel.model = album;
+      });
+
+
+      it('should find track 1 (when time == start)', function() {
+        var foundTrack = albumModel.findTrack(0);
+        var expectedTrack = album.trackList[0];
+
+        expect(foundTrack).toEqual(expectedTrack);
+      });
+
+      it('should find track 1 (when time > start)', function() {
+        var foundTrack = albumModel.findTrack(420);
+        var expectedTrack = album.trackList[0];
+
+        expect(foundTrack).toEqual(expectedTrack);
+      });
+
+      it('should find track 2 (whent time == start)', function() {
+        var foundTrack = albumModel.findTrack(478);
+        var expectedTrack = album.trackList[1];
+
+        expect(foundTrack).toEqual(expectedTrack);
+      });
+
+      it('should find track 2 (when time > start)', function() {
+        var foundTrack = albumModel.findTrack(500);
+        var expectedTrack = album.trackList[1];
+
+        expect(foundTrack).toEqual(expectedTrack);
+      });
+
+      it('should find track 3 (whent time == start)', function() {
+        var foundTrack = albumModel.findTrack(947);
+        var expectedTrack = album.trackList[2];
+
+        expect(foundTrack).toEqual(expectedTrack);
+      });
+
+      it('should find track 3 (when time > start)', function() {
+        var foundTrack = albumModel.findTrack(1000);
+        var expectedTrack = album.trackList[2];
+
+        expect(foundTrack).toEqual(expectedTrack);
+      });
+
+    });
+
     xdescribe('previous()', function() {
 
     });

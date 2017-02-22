@@ -57,6 +57,23 @@ export function albumModelService() {
 		}
 	}
 
+	/**
+		Find track in the track list corresponding to _time_ elapsed in the video in seconds
+	*/
+	this.findTrack = function(/** number in seconds */ time) {
+		const trackNumber = this.model.trackList.length;
+
+		for(var i = 0; i < trackNumber - 1; i++) {
+
+			if(time >= this.model.trackList[i].start && time < this.model.trackList[i+1].start) {				
+				return this.model.trackList[i];
+
+			}
+			
+		}	
+		return this.model.trackList[trackNumber-1];
+	}
+
 
 
 	/**
