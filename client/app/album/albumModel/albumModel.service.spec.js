@@ -445,7 +445,7 @@ describe('Service: albumModel', function() {
     });
 
     describe('findTrack()', function() {
-      
+
 
       beforeEach(function() {
         albumModel.model = album;
@@ -504,25 +504,47 @@ describe('Service: albumModel', function() {
       it('should call the controller callback with the current track number when it is the first track', function() {
         albumModel.previous(420, ctrl.callback);
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].num);
+        expect(ctrl.callback).toHaveBeenCalledWith(1);
       });
 
       it('should call the controller callback with the previous track number when it is not the first track (2 -> 1)', function() {
         albumModel.previous(500, ctrl.callback);
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[0].num);
+        expect(ctrl.callback).toHaveBeenCalledWith(1);
       });
 
       it('should call the controller callback with the previous track number when it is not the first track (3 -> 2)', function() {
         albumModel.previous(1000, ctrl.callback);
 
-        expect(ctrl.callback).toHaveBeenCalledWith(albumModel.model.trackList[1].num);
+        expect(ctrl.callback).toHaveBeenCalledWith(2);
       });
 
     });
 
-    xdescribe('next()', function() {
 
+
+    describe('next()', function() {
+      beforeEach(function() {
+        albumModel.model = album;
+      });
+
+      it('should call the controller callback with the current track number when it is the last track', function() {
+        albumModel.next(1000, ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(3);
+      });
+
+      it('should call the controller callback with the next track number when it is not the first track (1 -> 2)', function() {
+        albumModel.next(400, ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(2);
+      });
+
+      it('should call the controller callback with the next track number when it is not the first track (2 -> 3)', function() {
+        albumModel.next(500, ctrl.callback);
+
+        expect(ctrl.callback).toHaveBeenCalledWith(3);
+      });
     });
 
 
