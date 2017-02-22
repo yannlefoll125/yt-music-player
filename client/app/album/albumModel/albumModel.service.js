@@ -76,15 +76,7 @@ export function albumModelService() {
 
 	this.previous = function(elapsed, callback) {
 		var currentTrack = this.findTrack(elapsed);
-		var previousTrackNumber;
-
-		if(currentTrack.num == 1) {
-			previousTrackNumber = 1;
-		} else {
-			previousTrackNumber = currentTrack.num - 1;
-		}
-
-		callback(previousTrackNumber);
+		callback(currentTrack.num == 1 ? 1 : currentTrack.num -1);
 	}
 
 
