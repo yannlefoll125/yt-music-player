@@ -46,6 +46,9 @@ export function albumModelService() {
 			this.playerState = PlayerStates.PLAYING;
 
 			callback(this.currentTrack.num);
+		} else {
+			console.log('already playing');
+			return;
 		}
 	}
 

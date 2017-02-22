@@ -366,9 +366,9 @@ describe('Service: albumModel', function() {
       }
     }
 
-    beforeAll(function() {
+    beforeEach(function() {
       spyOn(ctrl, 'callback');
-    })
+    });
 
 
     describe('play()', function() {
@@ -391,6 +391,18 @@ describe('Service: albumModel', function() {
         albumModel.play(ctrl.callback);
 
         expect(ctrl.callback).toHaveBeenCalledWith(albumModel.currentTrack.num);
+        expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
+        expect(albumModel.currentTrack).toEqual(album.trackList[1]);
+        
+      });
+
+      it('should not call the callback if the player is already in PLAYING state', function() {
+        albumModel.playerState = PlayerStates.PLAYING;
+        albumModel.currentTrack = album.trackList[1];
+
+        albumModel.play(ctrl.callback);
+
+        expect(ctrl.callback).not.toHaveBeenCalled();
         expect(albumModel.playerState).toBe(PlayerStates.PLAYING);
         expect(albumModel.currentTrack).toEqual(album.trackList[1]);
         
