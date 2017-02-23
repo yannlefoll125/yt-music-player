@@ -8,6 +8,11 @@ export function secToMinSecFilter() {
   		return '';
   	}
 
+    if(typeof input == 'string') {
+      input = parseInt(input.split(',').join(''));
+    }
+    
+
   	var min = Math.floor(input / 60);
   	var sec = input % 60;
 

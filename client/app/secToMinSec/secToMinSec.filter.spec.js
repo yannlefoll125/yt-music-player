@@ -27,6 +27,11 @@ describe('Filter: secToMinSec', function() {
     expect(secToMinSec(input)).toBe('0:24');
   });
 
+  it('should return the input given in seconds (number) in {M{1,2}:SS} format (1585  -> 26:25)', function() {
+    var input = 1585;
+    expect(secToMinSec(input)).toBe('26:25');
+  });
+
   it('should return the input given in seconds (string) in {M{1,2}:SS} format (\'125\' -> 2:05)', function() {
     var input = '125';
     expect(secToMinSec(input)).toBe('2:05');
@@ -45,5 +50,10 @@ describe('Filter: secToMinSec', function() {
   it('should return an empty string when the input is null', function() {
     var input = null;
     expect(secToMinSec(input)).toBe('');
+  });
+
+  it('should return the input given in seconds (string) in {M{1,2}:SS} format (1,585  -> 26:25)', function() {
+    var input = '1,585';
+    expect(secToMinSec(input)).toBe('26:25');
   });
 });
