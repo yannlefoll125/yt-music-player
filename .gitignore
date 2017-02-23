@@ -9,3 +9,4 @@ dist
 npm-debug.log
 coverage
 client/touch.js
+bower_components/*

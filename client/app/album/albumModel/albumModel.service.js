@@ -57,6 +57,10 @@ export function albumModelService() {
 		return this.model.trackList[trackNumber-1];
 	}
 
+	this.trackSelected = function() {
+		this.playerState = PlayerStates.PLAYING;
+	}
+
 	this.play = function(elapsed, callback) {
 
 		if(this.playerState == PlayerStates.PAUSED || this.playerState == PlayerStates.STOPPED) {

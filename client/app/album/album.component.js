@@ -65,6 +65,8 @@ export class AlbumComponent {
 
   onTrackSelect(track) {
     console.log('album controller: onTrackSelect()');
+    this.showPlayButton = false;
+    this.albumModel.trackSelected();
     this.ytPlayerControl.seekTo(track.start);
     this.albumViewModel.setActiveTrack(track.num);
   }
@@ -96,7 +98,7 @@ export class AlbumComponent {
     this.albumModel.previous(currentTime, function(trackNumber, trackStart) {
       self.ytPlayerControl.seekTo(trackStart);
       self.albumViewModel.setActiveTrack(trackNumber);
-      console.log(self.albumViewModel.trackList);
+
     });
   }
 
@@ -106,7 +108,7 @@ export class AlbumComponent {
     this.albumModel.next(currentTime, function(trackNumber, trackStart) {
       self.ytPlayerControl.seekTo(trackStart);
       self.albumViewModel.setActiveTrack(trackNumber);
-      console.log(self.albumViewModel.trackList);
+
     });
   }
 

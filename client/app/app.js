@@ -9,6 +9,8 @@ import ngSanitize from 'angular-sanitize';
 const ngRoute = require('angular-route');
 
 import uiBootstrap from 'angular-ui-bootstrap';
+import bsAffix from 'angular-bootstrap-affix';
+//import bsAffix from '../../bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.min.js';
 // import ngMessages from 'angular-messages';
 
 
@@ -52,7 +54,7 @@ import secToMinSec from './secToMinSec/secToMinSec.filter';
 import './app.less';
 
 
-angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, navbar,
+angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, bsAffix, navbar,
    main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel, ytPlayer, secToMinSec
 
 ])
