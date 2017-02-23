@@ -42,11 +42,16 @@ export class AlbumComponent {
       
     });
 
+    this.currentTime;
+
     this.showPlayButton = true;
     this.ytPlayerControl = {
       videoId: this.videoId,
       currentTimeCallback: function(currentTime) {
-        console.log('currentTime: ' + currentTime);
+
+        self.currentTime = currentTime;
+        var track = self.albumModel.findTrack(self.currentTime);
+        self.albumViewModel.setActiveTrack(track.num);
       }
 
     };

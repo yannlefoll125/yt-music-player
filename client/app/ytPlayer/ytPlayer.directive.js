@@ -68,7 +68,7 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
         player.playVideo();
         scope.currentTimeUpdatePromise = $interval(function() {
           scope.control.currentTimeCallback(player.getCurrentTime());
-        }, 1000);
+        }, 250);
       }
 
       scope.control.pause = function() {
