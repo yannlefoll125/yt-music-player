@@ -44,9 +44,14 @@ export class AlbumComponent {
 
     this.showPlayButton = true;
     this.ytPlayerControl = {
-      videoId: this.videoId
+      videoId: this.videoId,
+      currentTimeCallback: function(currentTime) {
+        console.log('currentTime: ' + currentTime);
+      }
 
     };
+
+    
     //this.ytPlayerControl.initPlayer(this.videoId);
     console.log('AlbumComponent: constructor end');
   }

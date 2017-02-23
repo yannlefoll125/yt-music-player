@@ -2,7 +2,7 @@
 const angular = require('angular');
 
 export default angular.module('ytMusicPlayerApp.ytPlayer', [])
-.directive('ytPlayer', ['$window', function($window) {
+.directive('ytPlayer', ['$window', '$interval', function($window, $interval) {
   return {
     template: '<div class="youtube-player"></div>',
     restrict: 'E',
@@ -56,18 +56,26 @@ export default angular.module('ytMusicPlayerApp.ytPlayer', [])
 
       initPlayer();
 
+      scope.currentTimeUpdatePromise = undefined;
+
       scope.control.seekTo = function(/**number: start time in seconds*/ startTime) {
         console.log('ytPlayer: Start song at ' + startTime + ' seconds');
         player.seekTo(startTime, true);
-        player.playVideo();
+        scope.control.play();
       }
 
       scope.control.play = function() {
         player.playVideo();
+        scope.currentTimeUpdatePromise = $interval(function() {
+          scope.control.currentTimeCallback(player.getCurrentTime());
+        }, 1000);
       }
 
       scope.control.pause = function() {
         player.pauseVideo();
+        if(scope.currentTimeUpdatePromise) {
+          $interval.cancel(scope.currentTimeUpdatePromise);
+        }
       }
 
       scope.control.getCurrentTime = function() {
