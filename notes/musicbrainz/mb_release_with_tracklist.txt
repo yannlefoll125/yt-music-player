@@ -1,0 +1,148 @@
+Release info with recording list (tracklist)
+http://musicbrainz.org/ws/2/release/{release-MBID}}?fmt=json&inc=recordings
+
+Result for http://musicbrainz.org/ws/2/release/007b1cff-c27b-4924-92e3-fd59a03beeb5?fmt=json&inc=recordings
+(album MGLA - With hearts toward none)
+
+{
+  "country": "PL",
+  "packaging-id": null,
+  "barcode": null,
+  "media": [
+    {
+      "format-id": "9712d52a-4509-3d4b-a1a2-67c88c643e31",
+      "tracks": [
+        {
+          "number": "1",
+          "title": "With Hearts Toward None I",
+          "id": "37412980-74c9-4e0b-a052-163c85d1f0c5",
+          "length": 307346,
+          "recording": {
+            "disambiguation": "",
+            "id": "3a4c2de2-fed5-45c6-aa7a-a0a1cb650c6f",
+            "length": 307333,
+            "title": "With Hearts Toward None I",
+            "video": false
+          }
+        },
+        {
+          "title": "With Hearts Toward None II",
+          "number": "2",
+          "recording": {
+            "video": false,
+            "title": "With Hearts Toward None II",
+            "length": 274493,
+            "id": "2ee28da3-c6e5-4f9d-88ef-6352f4223ebb",
+            "disambiguation": ""
+          },
+          "length": 274506,
+          "id": "7dee081a-ae9a-4fcf-8404-416a02c993fc"
+        },
+        {
+          "number": "3",
+          "title": "With Hearts Toward None III",
+          "id": "5d1a151e-c2a0-4769-96d0-2f9fb41ac52f",
+          "length": 477613,
+          "recording": {
+            "id": "3a0fb481-d8a7-4ab6-9e1a-4746cdb5970e",
+            "disambiguation": "",
+            "length": 477600,
+            "title": "With Hearts Toward None III",
+            "video": false
+          }
+        },
+        {
+          "title": "With Hearts Toward None IV",
+          "number": "4",
+          "recording": {
+            "title": "With Hearts Toward None IV",
+            "video": false,
+            "id": "1e2f150f-b82e-4d9f-abfd-fb20d3d1c014",
+            "disambiguation": "",
+            "length": 348760
+          },
+          "length": 348773,
+          "id": "c91644de-f2f1-4ed7-9b25-5c05c8855504"
+        },
+        {
+          "title": "With Hearts Toward None V",
+          "number": "5",
+          "id": "ffbd19e6-07a8-4924-8231-26892ab7f8e6",
+          "recording": {
+            "title": "With Hearts Toward None V",
+            "video": false,
+            "disambiguation": "",
+            "id": "dc65ce77-bff4-4b11-8f3c-031ee2c4639b",
+            "length": 327293
+          },
+          "length": 327533
+        },
+        {
+          "number": "6",
+          "title": "With Hearts Toward None VI",
+          "length": 290093,
+          "recording": {
+            "id": "2513f981-f481-4e7c-9ae5-6a4852c697fd",
+            "disambiguation": "",
+            "length": 290093,
+            "title": "With Hearts Toward None VI",
+            "video": false
+          },
+          "id": "47049a49-4231-4ad1-a62a-d6409ee07743"
+        },
+        {
+          "number": "7",
+          "title": "With Hearts Toward None VII",
+          "id": "24df89ed-3d3d-491e-8a53-ed1c62c017a3",
+          "length": 601853,
+          "recording": {
+            "title": "With Hearts Toward None VII",
+            "video": false,
+            "disambiguation": "",
+            "id": "ea3972c4-b1ce-48f0-92cc-3407ee09a80b",
+            "length": 601840
+          }
+        }
+      ],
+      "title": "",
+      "position": 1,
+      "format": "CD",
+      "track-count": 7,
+      "track-offset": 0
+    }
+  ],
+  "quality": "normal",
+  "packaging": null,
+  "release-events": [
+    {
+      "area": {
+        "disambiguation": "",
+        "id": "dd7f80c8-f017-3d01-8608-2a8c9c32b954",
+        "sort-name": "Poland",
+        "name": "Poland",
+        "iso-3166-1-codes": [
+          "PL"
+        ]
+      },
+      "date": "2012-02-28"
+    }
+  ],
+  "cover-art-archive": {
+    "darkened": false,
+    "artwork": false,
+    "front": false,
+    "back": false,
+    "count": 0
+  },
+  "id": "007b1cff-c27b-4924-92e3-fd59a03beeb5",
+  "disambiguation": "",
+  "status-id": "4e304316-386d-3409-af2e-78857eec5cfe",
+  "asin": null,
+  "title": "With Hearts Toward None",
+  "status": "Official",
+  "date": "2012-02-28",
+  "text-representation": {
+    "language": "eng",
+    "script": "Latn"
+  }
+}
