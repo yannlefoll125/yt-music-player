@@ -18,22 +18,25 @@ describe("Class: MBReleaseGroupModel", function() {
 			expect(mbReleaseGroupModel.id).not.toBeDefined();
 			expect(mbReleaseGroupModel.artist).not.toBeDefined();
 			expect(mbReleaseGroupModel.title).not.toBeDefined();
+			expect(mbReleaseGroupModel.type).not.toBeDefined();
 
 			
 		});
 
-		it('should create a MBReleaseGroupModel with id, title and dateString attributes', function() {
+		it('should create a MBReleaseGroupModel with id, artist, title and type attributes', function() {
 			var id = "dfmlkdfsdfsd";
 			var artist = 'Mgla';
 			var title = "Exercises in futility";
+			var type = 'album';
 
 
-			mbReleaseGroupModel = new MBReleaseGroupModel(id, artist, title);
+			mbReleaseGroupModel = new MBReleaseGroupModel(id, artist, title, type);
 
 			expect(mbReleaseGroupModel).toBeDefined();
 			expect(mbReleaseGroupModel.id).toBe(id);
 			expect(mbReleaseGroupModel.artist).toBe(artist);
 			expect(mbReleaseGroupModel.title).toBe(title);
+			expect(mbReleaseGroupModel.type).toBe(type);
 
 			
 		});

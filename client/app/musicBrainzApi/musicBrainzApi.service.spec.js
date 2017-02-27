@@ -10,11 +10,7 @@ describe('Service: musicBrainzApi', function() {
 
   const MB_API_URL = 'http://musicbrainz.org/ws/2/';
 
-  var ctrl = {
-    callback: function(err, result) {
-
-    }
-  }
+  
 
   // load the service's module
   beforeEach(angular.mock.module(musicBrainzApiModule));
@@ -30,6 +26,13 @@ describe('Service: musicBrainzApi', function() {
 
 
   describe('searchArtist()', function() {
+
+    var ctrl = {
+      callback: function(err, result) {
+
+      }
+    }
+
     const MB_API_ARTIST_URL = MB_API_URL + 'artist*';
     const MB_API_ARTIST_URL_REGEXP = new RegExp(MB_API_ARTIST_URL);
 
@@ -310,7 +313,81 @@ describe('Service: musicBrainzApi', function() {
     });
   });
 
-describe('getReleaseGroupListByArtistId()', function() {
+describe('getReleaseGroupListByArtistId(id, artist, pageSize, pageOffset, callback)', function() {
+  var ctrl = {
+    callback: function(err, data) {
+
+    }
+  }
+
+  beforeEach(function() {
+    spyOn(ctrl, 'callback');
+  })
+
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
+
+
+  const MB_API_BROWSE_RELEASE_GROUP_URL = MB_API_URL + 'release-group*';
+  const MB_API_BROWSE_RELEASE_GROUP_URL_REGEXP = new RegExp(MB_API_BROWSE_RELEASE_GROUP_URL);
+
+  var artistId = "e7b4c928-8c45-4ecf-9f08-da64fe5c2ddd";
+  var artist = 'Mgla';
+
+  var mbReleaseGroupModel = new MBReleaseGroupModel("0231a9bb-3934-3727-98f2-542066f55c38", artist, "Crushing the Holy Trinity", 'Album');
+
+  it('should return a list with 1 MBReleaseGroupModel', function() {
+
+    var pageSize = 5;
+    var pageOffset = 0;
+
+    var expectedData = [mbReleaseGroupModel];
+
+    $httpBackend.expectGET(MB_API_BROWSE_RELEASE_GROUP_URL_REGEXP).respond(function(method, url, data, headers, params) {
+      var expectedParams = {
+        fmt: 'json',
+        artist: artistId,
+        limit: pageSize,
+        offset: pageOffset
+      };
+
+      expect(params.fmt).toEqual(expectedParams.fmt);
+      expect(params.artist).toEqual(expectedParams.artist);
+      expect(params.limit).toEqual(expectedParams.limit + '');
+      expect(params.offset).toEqual(expectedParams.offset + '');
+
+      return [200,
+      {
+        "release-groups": [
+        {
+          "first-release-date": "2005-07-11",
+          "title": "Crushing the Holy Trinity",
+          "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+          "id": "0231a9bb-3934-3727-98f2-542066f55c38",
+          "secondary-type-ids": [],
+          "secondary-types": [],
+          "primary-type": "Album",
+          "disambiguation": ""
+        }
+        ],
+        "release-group-offset": 0,
+        "release-group-count": 1
+      }
+      ]
+      
+    });
+
+    musicBrainzApi.getReleaseGroupListByArtistId(artistId, artist, pageSize, pageOffset, ctrl.callback);
+    $httpBackend.flush();
+
+    expect(ctrl.callback).toHaveBeenCalledWith(false, expectedData);
+
+  });
+
+
+
 
 });
 });
