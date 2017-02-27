@@ -2,11 +2,11 @@
 
 export default class MBReleaseGroupModel {
 
-	constructor(id, title, dateString) {
-		if(!!id && !!title && !!dateString) {
+	constructor(id, artist, title) {
+		if(!!id && !!artist && !!title) {
 			this.id = id; 
+			this.artist = artist;
 			this.title = title;
-			this.dateString = dateString;
 		}
 	}
 
