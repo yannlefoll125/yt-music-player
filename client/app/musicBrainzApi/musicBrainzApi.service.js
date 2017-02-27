@@ -17,7 +17,7 @@ export function musicBrainzApiService($http) {
 		};
 
 		$http.get(MB_API_ARTIST_URL, { params: params }).then(function success(res) {
-			
+
 			if(res.headers('Content-Type') == 'text/html; charset=utf-8') {
 				callback({status: 404});
 				return;
@@ -37,10 +37,21 @@ export function musicBrainzApiService($http) {
 
 
 		}, function error(res) {
+			var status;
+
+			if(res.headers('status')) {
+				status = res.headers('status');
+			} else {
+				status = -1;
+			}
+			callback({status: status});
 
 		});
 
-		
+	}
+
+	this.getReleaseList = function(artistId, maxNumber, callback) {
+
 	}
 
 }

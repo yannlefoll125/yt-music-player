@@ -2,6 +2,7 @@
 
 import musicBrainzApiModule from './musicBrainzApi.service';
 import MBArtistModel from './MBArtistModel.class';
+import MBReleaseGroupModel from './MBReleaseGroupModel.class';
 
 describe('Service: musicBrainzApi', function() {
 
@@ -292,10 +293,10 @@ describe('Service: musicBrainzApi', function() {
         expect(params.query).toBeDefined();
 
         return [200,
-              {},
-              {
-                'Content-Type': 'text/html; charset=utf-8'
-              }        
+        {},
+        {
+          'Content-Type': 'text/html; charset=utf-8'
+        }        
 
         ];
       });
@@ -308,4 +309,8 @@ describe('Service: musicBrainzApi', function() {
 
     });
   });
+
+describe('getReleaseGroupListByArtistId()', function() {
+
+});
 });

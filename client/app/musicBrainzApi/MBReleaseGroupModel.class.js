@@ -1,6 +1,6 @@
 'use strict';
 
-export default class MBReleaseModel {
+export default class MBReleaseGroupModel {
 
 	constructor(id, title, dateString) {
 		if(!!id && !!title && !!dateString) {
