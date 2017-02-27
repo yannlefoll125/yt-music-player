@@ -17,6 +17,12 @@ export function musicBrainzApiService($http) {
 		};
 
 		$http.get(MB_API_ARTIST_URL, { params: params }).then(function success(res) {
+			
+			if(res.headers('Content-Type') == 'text/html; charset=utf-8') {
+				callback({status: 404});
+				return;
+			}
+
 			var artistList = res.data.artists;
 
 			var artistModelList = [];
@@ -27,7 +33,7 @@ export function musicBrainzApiService($http) {
 					artist.country));
 			}
 
-			callback(artistModelList);
+			callback(false, artistModelList);
 
 
 		}, function error(res) {
