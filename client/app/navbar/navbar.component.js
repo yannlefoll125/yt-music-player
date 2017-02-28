@@ -8,6 +8,10 @@ export class NavbarComponent {
   menu = [{
     title: 'Home',
     link: '/'
+  },
+  {
+    title: 'MB Search',
+    link: '/musicBrainz'
   }];
 
   isCollapsed = true;
@@ -26,27 +30,30 @@ export class NavbarComponent {
   }
 
   onSearchSubmit() {
-
     var self = this;
 
-    this.youtubeDataApiService.searchVideo(this.searchQuery, function(err, itemList) {
-      if(err) {
-        console.error('youtubeDataApiService.searchVideo error: ' + err);
-      }
-      
-      self.searchResultModel.setVideoItemList(itemList);
+    var currentPath = self.$location.path();
 
-      self.$location.path('/');
+    if(currentPath == '/') {
+      this.youtubeDataApiService.searchVideo(this.searchQuery, function(err, itemList) {
+        if(err) {
+          console.error('youtubeDataApiService.searchVideo error: ' + err);
+        }
+
+        self.searchResultModel.setVideoItemList(itemList);
+
+        self.$location.path('/');
 
       //self.$scope.$emit('artist-search-result-up');      
     })
 
+      
+    } else if(currentPath == '/musicBrainz') {
 
-
+    }
 
     this.searchQuery = '';
 
-    
   }
 }
 

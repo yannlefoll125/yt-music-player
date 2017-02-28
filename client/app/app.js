@@ -23,6 +23,7 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import musicBrainzRoute from './musicBrainz/musicBrainz.component';
 
 //Import components
 import AlbumComponent from './album/album.component'
@@ -56,7 +57,7 @@ import secToMinSec from './secToMinSec/secToMinSec.filter';
 import './app.less';
 
 
-angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, bsAffix, navbar,
+angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, bsAffix, navbar, musicBrainzRoute,
    main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel, ytPlayer, secToMinSec,
    musicBrainzApi
 
