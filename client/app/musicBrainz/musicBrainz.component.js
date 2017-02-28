@@ -7,19 +7,19 @@ import routes from './musicBrainz.routes';
 
 export class MusicBrainzComponent {
   /*@ngInject*/
-  constructor($scope) {
+  constructor($scope, musicBrainzApi) {
     this.message = 'Hello';
 
     var self = this;
 
     $scope.$on('search-submit-event-down', function(event, query) {
       console.log('MusicBrainzComponent: submit-search-event-down received with query: ' + query);
-    })
+    });
 
   }
 }
 
-MusicBrainzComponent.$inject = ['$scope', 'youtubeDataApiService', 'searchResultModel'];
+MusicBrainzComponent.$inject = ['$scope', 'musicBrainzApi'];
 
 export default angular.module('ytMusicPlayerApp.musicBrainz', [ngRoute])
   .config(routes)
