@@ -1,10 +1,10 @@
 'use strict';
 
 import album from './album.component';
-import albumModelMock from './albumModel/albumModel.mock';
+import albumModelMock from './model/albumModel.mock';
 import youtubeApiServiceMock from '../youtubeDataApiService/youtubeDataApiService.mock';
 
-import AlbumViewModel from './AlbumViewModel.class';
+import AlbumViewModel from './viewmodel/AlbumViewModel.class';
 
 describe('Component: AlbumComponent', function() {
   // load the controller's module

@@ -46,7 +46,7 @@ if(YOUTUBE_DATA_API) {
 
 import searchResultModel from './searchResultModel/searchResultModel.service';
 
-import albumModel from './album/albumModel/albumModel.service';
+import albumModel from './album/model/albumModel.service';
 
 import musicBrainzApi from './musicBrainz/api/musicBrainzApi.service';
 

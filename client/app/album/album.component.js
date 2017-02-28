@@ -4,8 +4,8 @@ const ngRoute = require('angular-route');
 
 
 import routes from './album.routes';
-import AlbumViewModel from './AlbumViewModel.class';
-import TrackViewModel from './TrackViewModel.class';
+import AlbumViewModel from './viewmodel/AlbumViewModel.class';
+import TrackViewModel from './viewmodel/TrackViewModel.class';
 
 
 export class AlbumComponent {

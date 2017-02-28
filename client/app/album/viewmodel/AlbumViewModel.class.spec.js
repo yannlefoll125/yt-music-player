@@ -2,7 +2,7 @@
 
 import AlbumViewModel from './AlbumViewModel.class';
 import TrackViewModel from './TrackViewModel.class';
-import TrackModel from './albumModel/TrackModel.class';
+import TrackModel from '../model/TrackModel.class';
 
 describe("Class: AlbumViewModel", function() {
 
