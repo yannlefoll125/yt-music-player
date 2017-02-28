@@ -2,7 +2,6 @@
 /* eslint no-sync: 0 */
 
 import angular from 'angular';
-//import youtubeDataApiService from '../youtubeDataApiService/youtubeDataApiService.service';
 
 export class NavbarComponent {
   menu = [{
@@ -16,13 +15,14 @@ export class NavbarComponent {
 
   isCollapsed = true;
 
-  constructor($location, $scope, youtubeDataApiService, searchResultModel) {
+  currentPath;
+
+  constructor($location, $scope) {
     'ngInject';
 
     this.$location = $location;
     this.$scope = $scope;
-    this.youtubeDataApiService = youtubeDataApiService;
-    this.searchResultModel = searchResultModel;
+
   }
 
   isActive(route) {
@@ -30,34 +30,15 @@ export class NavbarComponent {
   }
 
   onSearchSubmit() {
-    var self = this;
+    console.log('onSearchSubmit()');
 
-    var currentPath = self.$location.path();
-
-    if(currentPath == '/') {
-      this.youtubeDataApiService.searchVideo(this.searchQuery, function(err, itemList) {
-        if(err) {
-          console.error('youtubeDataApiService.searchVideo error: ' + err);
-        }
-
-        self.searchResultModel.setVideoItemList(itemList);
-
-        self.$location.path('/');
-
-      //self.$scope.$emit('artist-search-result-up');      
-    })
-
-      
-    } else if(currentPath == '/musicBrainz') {
-
-    }
-
+    this.$scope.$emit('search-submit-event-up', this.searchQuery);
     this.searchQuery = '';
 
   }
 }
 
-NavbarComponent.$inject = ['$location', '$scope', 'youtubeDataApiService', 'searchResultModel'];
+NavbarComponent.$inject = ['$location', '$scope'];
 
 export default angular.module('directives.navbar', [])
 .component('navbar', {

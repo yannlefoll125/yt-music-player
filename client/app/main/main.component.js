@@ -33,7 +33,25 @@ export class MainComponent {
     }
 
     this.searchResultModel.addListener(this.searchResultModelCallback);
-    this.searchResults = this.videoResultViewModelFromModel(this.searchResultModel.getVideoItemList());
+    //this.searchResults = this.videoResultViewModelFromModel(this.searchResultModel.getVideoItemList());
+
+    $scope.$on('search-submit-event-down', function(event, query) {
+      console.log('MainComponent: search-submit-event with query: ' + query);
+      self.youtubeDataApiService.searchVideo(query, function(err, itemList) {
+        if(err) {
+          console.error('youtubeDataApiService.searchVideo error: ' + err);
+        }
+
+        self.searchResultModel.setVideoItemList(itemList);
+
+        //self.$location.path('/');
+
+      //self.$scope.$emit('artist-search-result-up');      
+    })
+
+
+
+    });
 
   }
 
