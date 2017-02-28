@@ -1,7 +1,7 @@
 'use strict';
 
 import MusicBrainzComponentModule from './musicBrainz.component';
-import musicBrainzApiMock from '../musicBrainzApi/musicBrainzApi.mock';
+import musicBrainzApiMock from './api/musicBrainzApi.mock';
 
 describe('Component: MusicBrainzComponent', function() {
   // load the controller's module

@@ -1,7 +1,5 @@
 'use strict';
 
-import MBReleaseGroupModel from '../musicBrainzApi/MBReleaseGroupModel.class';
-
 export default class MBReleaseGroupViewModel {
 
 	constructor(...args) {

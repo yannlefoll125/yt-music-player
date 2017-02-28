@@ -1,7 +1,7 @@
 'use strict';
 
 import MBArtistViewModel from './MBArtistViewModel.class';
-import MBArtistModel from '../musicBrainzApi/MBArtistModel.class';
+import MBArtistModel from '../model/MBArtistModel.class';
 
 describe("Class: MBArtistViewModel", function() {
 

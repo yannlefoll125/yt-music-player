@@ -48,7 +48,7 @@ import searchResultModel from './searchResultModel/searchResultModel.service';
 
 import albumModel from './album/albumModel/albumModel.service';
 
-import musicBrainzApi from './musicBrainzApi/musicBrainzApi.service';
+import musicBrainzApi from './musicBrainz/api/musicBrainzApi.service';
 
 import ytPlayer from './ytPlayer/ytPlayer.directive';
 

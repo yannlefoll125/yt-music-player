@@ -1,8 +1,8 @@
 'use strict';
 const angular = require('angular');
 
-import MBArtistModel from './MBArtistModel.class';
-import MBReleaseGroupModel from './MBReleaseGroupModel.class';
+import MBArtistModel from '../model/MBArtistModel.class';
+import MBReleaseGroupModel from '../model/MBReleaseGroupModel.class';
 
 /*@ngInject*/
 export function musicBrainzApiService($http) {

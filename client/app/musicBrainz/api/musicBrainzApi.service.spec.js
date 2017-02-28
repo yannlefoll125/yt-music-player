@@ -1,8 +1,8 @@
 'use strict';
 
 import musicBrainzApiModule from './musicBrainzApi.service';
-import MBArtistModel from './MBArtistModel.class';
-import MBReleaseGroupModel from './MBReleaseGroupModel.class';
+import MBArtistModel from '../model/MBArtistModel.class';
+import MBReleaseGroupModel from '../model/MBReleaseGroupModel.class';
 
 describe('Service: musicBrainzApi', function() {
 

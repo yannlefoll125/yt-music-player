@@ -1,7 +1,7 @@
 'use strict';
 
 import MBReleaseGroupViewModel from './MBReleaseGroupViewModel.class';
-import MBReleaseGroupModel from '../musicBrainzApi/MBReleaseGroupModel.class';
+import MBReleaseGroupModel from '../model/MBReleaseGroupModel.class';
 
 describe("Class: MBReleaseGroupViewModel", function() {
 
