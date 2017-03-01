@@ -15,4 +15,6 @@ describe('Service: musicBrainzModel', function() {
   it('should do something', function() {
     expect(!!musicBrainzModel).toBe(true);
   });
+
+  
 });

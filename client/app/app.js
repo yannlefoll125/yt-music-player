@@ -49,6 +49,7 @@ import searchResultModel from './searchResultModel/searchResultModel.service';
 import albumModel from './album/model/albumModel.service';
 
 import musicBrainzApi from './musicBrainz/api/musicBrainzApi.service';
+import musicBrainzModel from './musicBrainz/model/musicBrainzModel.service';
 
 import ytPlayer from './ytPlayer/ytPlayer.directive';
 
@@ -59,7 +60,7 @@ import './app.less';
 
 angular.module('ytMusicPlayerApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, bsAffix, navbar, musicBrainzRoute,
    main, constants, util, youtubeDataApiService, rootController, AlbumComponent, searchResultModel, albumModel, ytPlayer, secToMinSec,
-   musicBrainzApi
+   musicBrainzApi, musicBrainzModel
 
 ])
   .config(routeConfig)
