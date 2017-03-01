@@ -1,4 +1,27 @@
-# yo-fullstack
+# yt-music-player
+
+yt-music-player is a youtube proxy application. It aims to make listening to full music albums on youtube easier. The base idea is to give a music player like GUI to play/pause and select songs in a 'full album video' 
+
+What it does for the moment is: 
+- Search an artist or album using the [Youtube Data Rest API](https://developers.google.com/youtube/v3/) (the search field adds 'full album' after the query)
+- The application searches the video description to find a track list, and tries to parse it to get the title and the start time (in the video) of each track
+
+In development:
+- Use [musicbrainz API](https://musicbrainz.org/doc/Development/XML_Web_Service/Version_2) to find information of artist, albums, album tracks to refine youtube search and track listing
+
+For later:
+- User space for favorites
+- Playlists
+- Chat between users
+
+
+## About the project
+
+This project is mainly about praticing:
+- AngularJS/NodeJS
+- Software design, development and testing (experiment with test driven development)
+- Learn recent tools: Gulp, Yeoman, etc...
+
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.1.2.
 
