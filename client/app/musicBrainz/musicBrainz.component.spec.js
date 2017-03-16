@@ -1,21 +1,21 @@
 'use strict';
 
 import MusicBrainzComponentModule from './musicBrainz.component';
-import musicBrainzApiMock from './api/musicBrainzApi.mock';
+import musicBrainzModelMock from './model/musicBrainzModel.mock';
 
 describe('Component: MusicBrainzComponent', function() {
   // load the controller's module
   beforeEach(angular.mock.module(MusicBrainzComponentModule));
-  beforeEach(angular.mock.module(musicBrainzApiMock));
+  beforeEach(angular.mock.module(musicBrainzModelMock));
 
   var MusicBrainzComponent;
-  var musicBrainzApi;
+  var musicBrainzModel;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($componentController, _musicBrainzApi_) {
-    musicBrainzApi = _musicBrainzApi_;
+  beforeEach(inject(function($componentController, _musicBrainzModel_) {
+    musicBrainzModel = _musicBrainzModel_;
     MusicBrainzComponent = $componentController('musicBrainz', {
-      musicBrainzApi
+      musicBrainzModel
     });
   }));
 
