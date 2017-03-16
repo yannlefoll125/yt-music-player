@@ -11,6 +11,11 @@ export function musicBrainzApiService($http) {
 	const MB_API_ARTIST_URL = MB_API_URL + 'artist';
 	const MB_API_BROWSE_RELEASE_GROUP_URL = MB_API_URL + 'release-group*';
 
+	/**
+	Search for an artist in the Musicbrainz database
+	@param {string} query
+	@param {function} callback
+	*/
 	this.searchArtist = function(query, callback) {
 
 		var params = {
@@ -29,10 +34,12 @@ export function musicBrainzApiService($http) {
 
 			var artistModelList = [];
 			for(var artist of artistList) {
-				artistModelList.push(new MBArtistModel(
+				if(!!artist.name && !!artist.country && !!artist.id) {
+					artistModelList.push(new MBArtistModel(
 					artist.id,
 					artist.name,
 					artist.country));
+				}
 			}
 
 			callback(false, artistModelList);
