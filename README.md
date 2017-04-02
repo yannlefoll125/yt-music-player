@@ -23,6 +23,10 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 Run `gulp build` for building and `gulp serve` for preview.
 
+When installing modules on server with npm, use the unsafe-perm flag, otherwise node-gyp will fail.
+
+`sudo npm install --unsafe-perm`
+
 ## Testing
 
 Running `npm test` will run the unit tests with karma.
